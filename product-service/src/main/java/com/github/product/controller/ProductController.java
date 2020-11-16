@@ -26,6 +26,12 @@ public class ProductController {
         this.productService = productService;
     }
 
+    @ApiOperation("商品浏览量统计/文章浏览量统计")
+    @GetMapping("/view")
+    public ProductVO view(@ApiParam("主键") @RequestParam("id") Long id){
+        return productService.view(id);
+    }
+
     @ApiOperation("获取所有商品")
     @GetMapping("/list")
     public List<ProductVO> getAll(){

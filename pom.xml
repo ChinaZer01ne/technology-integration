@@ -20,6 +20,7 @@
         <springboot.version>2.4.0</springboot.version>
         <lombok.version>1.18.16</lombok.version>
         <swagger.version>3.0.0</swagger.version>
+        <springcache.version>2.2.2.RELEASE</springcache.version>
     </properties>
 
     <dependencyManagement>
@@ -68,6 +69,11 @@
                 <groupId>com.github</groupId>
                 <artifactId>peach-cache</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-cache</artifactId>
+                <version>${springcache.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

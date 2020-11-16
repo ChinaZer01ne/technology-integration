@@ -22,4 +22,11 @@ public interface ProductService {
      * @return com.github.product.entity.vo.ProductVO
      */
     ProductVO get(Long id);
+
+    /**
+     * 统计商品的访问量
+     * @param id :
+     * @return com.github.product.entity.vo.ProductVO
+     */
+    ProductVO view(Long id);
 }
