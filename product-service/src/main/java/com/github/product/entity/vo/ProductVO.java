@@ -23,6 +23,11 @@ public class ProductVO {
     @ApiModelProperty("名称")
     private String name;
     /**
+     * 价格
+     * */
+    @ApiModelProperty("价格")
+    private Integer price;
+    /**
      * 浏览量
      * */
     @ApiModelProperty("浏览量")

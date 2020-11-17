@@ -1,6 +1,6 @@
 package com.github.product.service.impl;
 
-import com.github.product.entity.Product;
+import com.github.product.utils.BeanUtils;
 import com.github.product.entity.vo.ProductVO;
 import com.github.product.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Zer01ne
@@ -31,8 +32,14 @@ public class ProductServiceImpl implements ProductService {
         ProductVO productVO = new ProductVO();
         productVO.setId(1L);
         productVO.setName("机械键盘");
-        productVO.setViews(1L);
         productVOList.add(productVO);
+
+        // 获取商品浏览量
+        for (ProductVO product : productVOList) {
+            Long views = Long.valueOf(stringRedisTemplate.opsForValue().get(String.format("product:%d", product.getId())));
+            product.setViews(views);
+        }
+
         return productVOList;
     }
 
@@ -42,7 +49,11 @@ public class ProductServiceImpl implements ProductService {
         ProductVO productVO = new ProductVO();
         productVO.setId(1L);
         productVO.setName("机械键盘");
-        productVO.setViews(1L);
+
+        // 获取商品访问量
+        Long views = Long.valueOf(stringRedisTemplate.opsForValue().get(String.format("product:%d", productVO.getId())));
+        productVO.setViews(views);
+
         return productVO;
     }
 
@@ -60,5 +71,17 @@ public class ProductServiceImpl implements ProductService {
         productVO.setId(id);
         productVO.setName("机械键盘");
         return productVO;
+    }
+
+    @Override
+    public Boolean changPrice(Long id, Integer price) {
+        ProductVO productVO = new ProductVO();
+        productVO.setId(id);
+        productVO.setName("机械键盘");
+        productVO.setPrice(price);
+        Map<String, Object> productMap = BeanUtils.objectToMap(productVO);
+        stringRedisTemplate.opsForHash().putAll(String.format("product:%d", id),productMap);
+        // TODO chang database
+        return true;
     }
 }

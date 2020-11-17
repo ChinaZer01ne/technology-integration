@@ -5,10 +5,7 @@ import com.github.product.service.ProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,6 +27,12 @@ public class ProductController {
     @GetMapping("/view")
     public ProductVO view(@ApiParam("主键") @RequestParam("id") Long id){
         return productService.view(id);
+    }
+
+    @ApiOperation("商品变价")
+    @PutMapping("/price/change")
+    public Boolean changPrice(@ApiParam("主键") @RequestParam("id") Long id, @ApiParam("目标价格") @RequestParam("price") Integer price){
+        return productService.changPrice(id, price);
     }
 
     @ApiOperation("获取所有商品")

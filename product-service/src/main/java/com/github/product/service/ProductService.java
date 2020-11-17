@@ -25,8 +25,16 @@ public interface ProductService {
 
     /**
      * 统计商品的访问量
-     * @param id :
+     * @param id : 主键
      * @return com.github.product.entity.vo.ProductVO
      */
     ProductVO view(Long id);
+
+    /**
+     * 商品变价
+     * @param id : 主键
+     * @param price : 目标
+     * @return java.lang.Boolean
+     */
+    Boolean changPrice(Long id, Integer price);
 }
