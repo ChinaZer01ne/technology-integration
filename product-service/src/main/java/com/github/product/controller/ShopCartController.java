@@ -38,4 +38,10 @@ public class ShopCartController {
     public CartVO mergeCart(@ApiParam("购物车id") @RequestParam("cartId") Long cartId){
         return shopCartService.mergeCart(cartId);
     }
+
+    @ApiOperation("查询购物车")
+    @GetMapping("/get")
+    public CartVO get(@ApiParam("购物车id") @RequestParam("cartId") Long cartId){
+        return shopCartService.get(cartId);
+    }
 }

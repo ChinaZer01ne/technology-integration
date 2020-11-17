@@ -34,4 +34,11 @@ public interface ShopCartService {
      * @return com.github.product.entity.vo.CartVO
      */
     CartVO mergeCart(Long cartId);
+
+    /**
+     * 获取购物车信息
+     * @param cartId :
+     * @return com.github.product.entity.vo.CartVO
+     */
+    CartVO get(Long cartId);
 }

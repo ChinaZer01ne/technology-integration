@@ -17,5 +17,11 @@ public class CartVO {
      * 购物车商品集合
      */
     @ApiModelProperty("购物车商品集合")
-    List<CartProductVO> cartProductList;
+    private List<CartProductVO> cartProductList;
+
+    /**
+     * 购物车商品数量
+     */
+    @ApiModelProperty("购物车商品数量")
+    private Long size;
 }
