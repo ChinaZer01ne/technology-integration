@@ -7,6 +7,7 @@ import com.github.product.service.ShopCartService;
 import com.github.product.utils.IdGenerator;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 public class ShopCartServiceImpl implements ShopCartService {
 
     private static final String CART_KEY = "cart:user:%d";
+    private static final String COOKIE_CART_KEY = "cart:%d";
 
     private final HttpServletRequest request;
     private final HttpServletResponse response;
@@ -77,10 +79,10 @@ public class ShopCartServiceImpl implements ShopCartService {
         // 1、获取cardId
         Long cardId = getCardIdFromCookie();
         // 2、根据cardId查看redis中是否有对应的购物车信息
-        Boolean hasKey = redisTemplate.hasKey(String.format("cart:%d", cardId));
-        redisTemplate.opsForHash().put(String.format("cart:%d", cardId),cartRequest.getProductId(),cartRequest.getProductNum());
+        Boolean hasKey = redisTemplate.hasKey(String.format(COOKIE_CART_KEY, cardId));
+        redisTemplate.opsForHash().put(String.format(COOKIE_CART_KEY, cardId),cartRequest.getProductId(),cartRequest.getProductNum());
         if (!hasKey) {
-            redisTemplate.expire(String.format("cart:%d", cardId),90,TimeUnit.DAYS);
+            redisTemplate.expire(String.format(COOKIE_CART_KEY, cardId),90,TimeUnit.DAYS);
         }
         //  如果有，直接添加购物车商品
         //  如果没有，新建购物车，添加商品
@@ -135,9 +137,25 @@ public class ShopCartServiceImpl implements ShopCartService {
     @Override
     public CartVO mergeCart(Long cartId) {
         // 1、取cookie中的购物车
+        Long cardId = getCardIdFromCookie();
+        String cartKey = String.format(COOKIE_CART_KEY, cardId);
+        //Boolean hasKey = redisTemplate.hasKey(COOKIE_CART_KEY);
+
+        // cookie中购物车信息
+        Map<Object, Object> cookieCart = redisTemplate.opsForHash().entries(cartKey);
+
         // 2、取redis中的购物车
+        // 登录用户的购物车信息
+        Long userId = 1L;
+        Map<Object, Object> userCart = redisTemplate.opsForHash().entries(String.format(CART_KEY, userId));
         // 3、合并购物车
-        // 4、发送消息，同部数据
+        userCart.putAll(cookieCart);
+        redisTemplate.opsForHash().putAll(String.format(CART_KEY, userId), userCart);
+        // 4、使Cookie中的购物车失效
+        Cookie cookie = new Cookie("cardId","");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        // TODO 5、发送消息，同部数据
         return null;
     }
 
