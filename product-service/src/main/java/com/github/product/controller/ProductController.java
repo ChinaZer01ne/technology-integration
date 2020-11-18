@@ -1,5 +1,6 @@
 package com.github.product.controller;
 
+import com.github.common.ServerResponse;
 import com.github.product.entity.vo.ProductVO;
 import com.github.product.service.ProductService;
 import io.swagger.annotations.Api;
@@ -25,25 +26,25 @@ public class ProductController {
 
     @ApiOperation("商品浏览量统计/文章浏览量统计")
     @GetMapping("/view")
-    public ProductVO view(@ApiParam("主键") @RequestParam("id") Long id){
-        return productService.view(id);
+    public ServerResponse<ProductVO> view(@ApiParam("主键") @RequestParam("id") Long id){
+        return ServerResponse.success(productService.view(id));
     }
 
     @ApiOperation("商品变价")
     @PutMapping("/price/change")
-    public Boolean changPrice(@ApiParam("主键") @RequestParam("id") Long id, @ApiParam("目标价格") @RequestParam("price") Integer price){
-        return productService.changPrice(id, price);
+    public ServerResponse<Boolean> changPrice(@ApiParam("主键") @RequestParam("id") Long id, @ApiParam("目标价格") @RequestParam("price") Integer price){
+        return ServerResponse.success(productService.changPrice(id, price));
     }
 
     @ApiOperation("获取所有商品")
     @GetMapping("/list")
-    public List<ProductVO> getAll(){
-        return productService.getAll();
+    public ServerResponse<List<ProductVO>> getAll(){
+        return ServerResponse.success(productService.getAll());
     }
 
     @ApiOperation("获取指定商品")
     @GetMapping("/get")
-    public ProductVO get(@ApiParam("主键") @RequestParam("id") Long id){
-        return productService.get(id);
+    public ServerResponse<ProductVO> get(@ApiParam("主键") @RequestParam("id") Long id){
+        return ServerResponse.success(productService.get(id));
     }
 }

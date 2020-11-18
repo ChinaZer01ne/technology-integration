@@ -59,5 +59,9 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
     </dependencies>
 </project>

@@ -4,13 +4,14 @@ import com.github.product.entity.input.CartRequest;
 import com.github.product.entity.vo.CartProductVO;
 import com.github.product.entity.vo.CartVO;
 import com.github.product.service.ShopCartService;
+import com.github.product.utils.IdGenerator;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -22,10 +23,16 @@ public class ShopCartServiceImpl implements ShopCartService {
 
     private static final String CART_KEY = "cart:user:%d";
 
+    private final HttpServletRequest request;
+    private final HttpServletResponse response;
     private final RedisTemplate<String, Object> redisTemplate;
+    private final IdGenerator idGenerator;
 
-    public ShopCartServiceImpl(RedisTemplate<String, Object> redisTemplate) {
+    public ShopCartServiceImpl(RedisTemplate<String, Object> redisTemplate, HttpServletRequest request, HttpServletResponse response, IdGenerator idGenerator) {
         this.redisTemplate = redisTemplate;
+        this.request = request;
+        this.response = response;
+        this.idGenerator = idGenerator;
     }
 
     @Override
@@ -67,7 +74,35 @@ public class ShopCartServiceImpl implements ShopCartService {
      * @return void
      */
     private void addCartForOffline(CartRequest cartRequest) {
+        // 1、获取cardId
+        Long cardId = getCardIdFromCookie();
+        // 2、根据cardId查看redis中是否有对应的购物车信息
+        Boolean hasKey = redisTemplate.hasKey(String.format("cart:%d", cardId));
+        redisTemplate.opsForHash().put(String.format("cart:%d", cardId),cartRequest.getProductId(),cartRequest.getProductNum());
+        if (!hasKey) {
+            redisTemplate.expire(String.format("cart:%d", cardId),90,TimeUnit.DAYS);
+        }
+        //  如果有，直接添加购物车商品
+        //  如果没有，新建购物车，添加商品
+    }
 
+    /**
+     * 从cookie中获取cartId，如果没有，则生成一个，并回写cookie
+     * @return java.lang.Long
+     */
+    private Long getCardIdFromCookie() {
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (Objects.equals(cookie.getName(),"cardId")) {
+                    return Long.valueOf(cookie.getValue());
+                }
+            }
+        }
+        Long generateId = idGenerator.generateId();
+        Cookie cookie = new Cookie("cartId", String.valueOf(generateId));
+        response.addCookie(cookie);
+        return generateId;
     }
 
     /**
@@ -84,7 +119,7 @@ public class ShopCartServiceImpl implements ShopCartService {
         redisTemplate.opsForHash().put(cartKey, cartRequest.getProductId().toString(), cartRequest.getProductNum());
         if (!hasKey) {
             // 如果redis中没有这个用户的购物车，需要给新建的购物车设置过期时间
-            redisTemplate.expire(cartKey,3, TimeUnit.MINUTES);
+            redisTemplate.expire(cartKey,90, TimeUnit.DAYS);
         }
         // TODO 发消息同步数据库
     }
@@ -99,6 +134,10 @@ public class ShopCartServiceImpl implements ShopCartService {
 
     @Override
     public CartVO mergeCart(Long cartId) {
+        // 1、取cookie中的购物车
+        // 2、取redis中的购物车
+        // 3、合并购物车
+        // 4、发送消息，同部数据
         return null;
     }
 
