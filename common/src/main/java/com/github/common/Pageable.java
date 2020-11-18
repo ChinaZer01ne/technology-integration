@@ -23,10 +23,19 @@ public class Pageable<T> {
     /**
      * 总记录
      */
-    private Integer totalCount;
+    private Long totalCount;
 
     /**
      * 数据
      */
     private List<T> data;
+
+    public static <T> Pageable<T> warp(List<T> data, Integer pageNum, Integer pageSize, Long size){
+        Pageable<T> pageable = new Pageable<>();
+        pageable.setData(data);
+        pageable.setPageNum(pageNum);
+        pageable.setPageSize(pageSize);
+        pageable.setTotalCount(size);
+        return pageable;
+    }
 }

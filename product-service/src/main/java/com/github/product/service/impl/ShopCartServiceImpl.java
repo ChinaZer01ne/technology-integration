@@ -1,5 +1,6 @@
 package com.github.product.service.impl;
 
+import com.github.product.constants.ProductConstants;
 import com.github.product.entity.input.CartRequest;
 import com.github.product.entity.vo.CartProductVO;
 import com.github.product.entity.vo.CartVO;
@@ -7,7 +8,6 @@ import com.github.product.service.ShopCartService;
 import com.github.product.utils.IdGenerator;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -21,9 +21,6 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 public class ShopCartServiceImpl implements ShopCartService {
-
-    private static final String CART_KEY = "cart:user:%d";
-    private static final String COOKIE_CART_KEY = "cart:%d";
 
     private final HttpServletRequest request;
     private final HttpServletResponse response;
@@ -79,10 +76,10 @@ public class ShopCartServiceImpl implements ShopCartService {
         // 1、获取cardId
         Long cardId = getCardIdFromCookie();
         // 2、根据cardId查看redis中是否有对应的购物车信息
-        Boolean hasKey = redisTemplate.hasKey(String.format(COOKIE_CART_KEY, cardId));
-        redisTemplate.opsForHash().put(String.format(COOKIE_CART_KEY, cardId),cartRequest.getProductId(),cartRequest.getProductNum());
+        Boolean hasKey = redisTemplate.hasKey(String.format(ProductConstants.COOKIE_CART_KEY, cardId));
+        redisTemplate.opsForHash().put(String.format(ProductConstants.COOKIE_CART_KEY, cardId),cartRequest.getProductId(),cartRequest.getProductNum());
         if (!hasKey) {
-            redisTemplate.expire(String.format(COOKIE_CART_KEY, cardId),90,TimeUnit.DAYS);
+            redisTemplate.expire(String.format(ProductConstants.COOKIE_CART_KEY, cardId),90,TimeUnit.DAYS);
         }
         //  如果有，直接添加购物车商品
         //  如果没有，新建购物车，添加商品
@@ -113,7 +110,7 @@ public class ShopCartServiceImpl implements ShopCartService {
      * @return void
      */
     private void addCartForOnline(CartRequest cartRequest) {
-        String cartKey = String.format(CART_KEY, cartRequest.getUserId());
+        String cartKey = String.format(ProductConstants.CART_KEY, cartRequest.getUserId());
         Boolean hasKey = redisTemplate.hasKey(cartKey);
         // 这行代码有两个功能：
         // 1、如果用户原来有购物车信息存在，那么直接修改购物车商品信息；
@@ -128,7 +125,7 @@ public class ShopCartServiceImpl implements ShopCartService {
 
     @Override
     public CartVO deleteCart(CartRequest cartRequest) {
-        String cartKey = String.format(CART_KEY, cartRequest.getUserId());
+        String cartKey = String.format(ProductConstants.CART_KEY, cartRequest.getUserId());
         redisTemplate.opsForHash().delete(cartKey, cartRequest.getProductId().toString());
         // TODO 发消息同步数据库
         return get(cartRequest.getCartId());
@@ -138,7 +135,7 @@ public class ShopCartServiceImpl implements ShopCartService {
     public CartVO mergeCart(Long cartId) {
         // 1、取cookie中的购物车
         Long cardId = getCardIdFromCookie();
-        String cartKey = String.format(COOKIE_CART_KEY, cardId);
+        String cartKey = String.format(ProductConstants.COOKIE_CART_KEY, cardId);
         //Boolean hasKey = redisTemplate.hasKey(COOKIE_CART_KEY);
 
         // cookie中购物车信息
@@ -147,10 +144,10 @@ public class ShopCartServiceImpl implements ShopCartService {
         // 2、取redis中的购物车
         // 登录用户的购物车信息
         Long userId = 1L;
-        Map<Object, Object> userCart = redisTemplate.opsForHash().entries(String.format(CART_KEY, userId));
+        Map<Object, Object> userCart = redisTemplate.opsForHash().entries(String.format(ProductConstants.CART_KEY, userId));
         // 3、合并购物车
         userCart.putAll(cookieCart);
-        redisTemplate.opsForHash().putAll(String.format(CART_KEY, userId), userCart);
+        redisTemplate.opsForHash().putAll(String.format(ProductConstants.CART_KEY, userId), userCart);
         // 4、使Cookie中的购物车失效
         Cookie cookie = new Cookie("cardId","");
         cookie.setMaxAge(0);
@@ -162,7 +159,7 @@ public class ShopCartServiceImpl implements ShopCartService {
     @Override
     public CartVO get(Long cartId) {
         Long userId = 10000L;
-        String cartKey = String.format(CART_KEY, userId);
+        String cartKey = String.format(ProductConstants.CART_KEY, userId);
         Long size = redisTemplate.opsForHash().size(cartKey);
         Map<Object, Object> entries = redisTemplate.opsForHash().entries(cartKey);
         List<CartProductVO> cartProductList = new ArrayList<>();

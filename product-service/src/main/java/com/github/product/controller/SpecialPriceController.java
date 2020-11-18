@@ -23,15 +23,10 @@ public class SpecialPriceController {
     @Autowired
     private SpecialPriceService specialPriceService;
 
-    @ApiOperation("获取特价商品详情")
-    @RequestMapping("/get")
-    public ServerResponse<SpecialPriceProductVO> get(@ApiParam("id") @RequestParam("id") Long id) {
-        return ServerResponse.success(specialPriceService.get(id));
-    }
-
     @ApiOperation("获取特价商品列表")
     @RequestMapping("/list")
-    public ServerResponse<Pageable<SpecialPriceProductVO>> list() {
-        return ServerResponse.success(specialPriceService.list());
+    public ServerResponse<Pageable<SpecialPriceProductVO>> list(@ApiParam("当前页") @RequestParam("pageNum") Integer pageNum,
+                                                                @ApiParam("页大小") @RequestParam("pageSize") Integer pageSize) {
+        return ServerResponse.success(specialPriceService.list(pageNum, pageSize));
     }
 }
