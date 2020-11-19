@@ -27,6 +27,7 @@ public class SpecialPriceController {
     @RequestMapping("/list")
     public ServerResponse<Pageable<SpecialPriceProductVO>> list(@ApiParam("当前页") @RequestParam("pageNum") Integer pageNum,
                                                                 @ApiParam("页大小") @RequestParam("pageSize") Integer pageSize) {
+
         return ServerResponse.success(specialPriceService.list(pageNum, pageSize));
     }
 }

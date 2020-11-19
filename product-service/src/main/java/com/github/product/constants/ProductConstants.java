@@ -16,4 +16,10 @@ public class ProductConstants {
      * 特价商品列表key（聚划算，拍拍岛）
      */
     public static final String JHS = "jhs";
+    /**
+     * 特价商品列表key（聚划算，拍拍岛）
+     * 使用二级缓存解决缓存击穿的问题
+     */
+    public static final String JHS_A = "jhs_a";
+    public static final String JHS_B = "jhs_b";
 }
