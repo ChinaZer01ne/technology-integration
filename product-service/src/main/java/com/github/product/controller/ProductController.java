@@ -36,15 +36,4 @@ public class ProductController {
         return ServerResponse.success(productService.changPrice(id, price));
     }
 
-    @ApiOperation("获取所有商品")
-    @GetMapping("/list")
-    public ServerResponse<List<ProductVO>> getAll(){
-        return ServerResponse.success(productService.getAll());
-    }
-
-    @ApiOperation("获取指定商品")
-    @GetMapping("/get")
-    public ServerResponse<ProductVO> get(@ApiParam("主键") @RequestParam("id") Long id){
-        return ServerResponse.success(productService.get(id));
-    }
 }

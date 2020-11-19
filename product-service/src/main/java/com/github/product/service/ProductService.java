@@ -10,18 +10,6 @@ import java.util.List;
  */
 public interface ProductService {
 
-    /**
-     * 获取所有商品信息
-     * @return java.util.List<com.github.product.entity.vo.ProductVO> 
-     */
-    List<ProductVO> getAll();
-
-    /**
-     * 获取指定商品
-     * @param id : 主键
-     * @return com.github.product.entity.vo.ProductVO
-     */
-    ProductVO get(Long id);
 
     /**
      * 统计商品的访问量

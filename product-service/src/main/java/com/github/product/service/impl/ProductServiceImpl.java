@@ -26,44 +26,35 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
-    @Override
-    public List<ProductVO> getAll() {
-        List<ProductVO> productVOList = new ArrayList<>();
-        ProductVO productVO = new ProductVO();
-        productVO.setId(1L);
-        productVO.setName("机械键盘");
-        productVOList.add(productVO);
-
-        // 获取商品浏览量
-        for (ProductVO product : productVOList) {
-            Long views = Long.valueOf(stringRedisTemplate.opsForValue().get(String.format("product:%d", product.getId())));
-            product.setViews(views);
-        }
-
-        return productVOList;
-    }
-
-    @Cacheable(key = "#id")
-    @Override
-    public ProductVO get(Long id) {
-        ProductVO productVO = new ProductVO();
-        productVO.setId(1L);
-        productVO.setName("机械键盘");
-
-        // 获取商品访问量
-        Long views = Long.valueOf(stringRedisTemplate.opsForValue().get(String.format("product:%d", productVO.getId())));
-        productVO.setViews(views);
-
-        return productVO;
-    }
 
     /**
      * 实现方案：redis自增实现PV统计，缺点：频繁修改redis，如果有一万个商品，每个商品有十万次访问，那么就要修改redis上亿次
      * 思考：1、如何将次数统计同步到数据库？
-     *      2、有没有更好的解决方案？zSet
+     *      2、有没有更好的解决方案？zSet，二级缓存
      */
     @Override
     public ProductVO view(Long id) {
+        // 普通的实现方式，高并发下会有问题
+        //return viewNormalImpl(id);
+        // 二级缓存的实现方式
+        return viewSecondLevelCacheImpl(id);
+    }
+
+    /**
+     * 二级缓存的方式实现浏览量统计
+     * @param id : 商品id
+     * @return com.github.product.entity.vo.ProductVO
+     */
+    private ProductVO viewSecondLevelCacheImpl(Long id) {
+        return null;
+    }
+
+    /**
+     * 简单的方式实现浏览量的统计，高并发下会扛不住
+     * @param id : 商品id
+     * @return com.github.product.entity.vo.ProductVO
+     */
+    private ProductVO viewNormalImpl(Long id) {
         Long increment = stringRedisTemplate.opsForValue().increment(String.format("product:%d", id));
         log.info("商品{}访问量为：{}",id,increment);
         ProductVO productVO = new ProductVO();
