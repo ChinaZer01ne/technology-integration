@@ -4,7 +4,6 @@ import com.github.common.exception.Assert;
 import com.github.common.exception.CommonException;
 import com.github.product.enums.ProductServerResponseEnum;
 import com.github.product.enums.RedEnvelopeEnum;
-import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
@@ -14,7 +13,6 @@ import java.util.List;
  * @since 2020/11/19 16:11
  */
 @Data
-@Builder
 public abstract class RedEnvelope {
 
     /**
