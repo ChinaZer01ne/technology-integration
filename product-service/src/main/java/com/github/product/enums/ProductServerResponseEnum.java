@@ -8,7 +8,7 @@ import com.github.common.ServerResponseEnum;
  */
 public enum ProductServerResponseEnum implements ServerResponseEnum {
 
-    ;
+    PARAM_ERROR(4001, "参数错误！");
     /**
      * 响应码
      */
