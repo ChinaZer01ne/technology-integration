@@ -1,5 +1,6 @@
 package com.github.product.service.impl;
 
+import com.github.product.constants.ProductConstants;
 import com.github.product.utils.BeanUtils;
 import com.github.product.entity.vo.ProductVO;
 import com.github.product.service.ProductService;
@@ -9,10 +10,12 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Zer01ne
@@ -42,10 +45,22 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 二级缓存的方式实现浏览量统计
+     * 每次PV操作时，先计算当前时间是哪个时间块，然后存储Map中
+     * 时间块：当前时间T/1000*60*60=小时key
      * @param id : 商品id
      * @return com.github.product.entity.vo.ProductVO
      */
     private ProductVO viewSecondLevelCacheImpl(Long id) {
+        long timeBlockPerMinutes = System.currentTimeMillis() / (1000 * 60 * 1);
+        // Map<时间块，Map<商品id，商品浏览量>>
+        Map<Long, Long> viewMap = ProductConstants.PV_MAP.get(timeBlockPerMinutes);
+        if (CollectionUtils.isEmpty(viewMap)) {
+            viewMap = new ConcurrentHashMap<>(16);
+            viewMap.put(id, 1L);
+        }else{
+            // 合并商品记录
+            viewMap.merge(id, 1L, Long::sum);
+        }
         return null;
     }
 
@@ -55,7 +70,7 @@ public class ProductServiceImpl implements ProductService {
      * @return com.github.product.entity.vo.ProductVO
      */
     private ProductVO viewNormalImpl(Long id) {
-        Long increment = stringRedisTemplate.opsForValue().increment(String.format("product:%d", id));
+        Long increment = stringRedisTemplate.opsForValue().increment(String.format(ProductConstants.PRODUCT_PV, id));
         log.info("商品{}访问量为：{}",id,increment);
         ProductVO productVO = new ProductVO();
         productVO.setViews(increment);

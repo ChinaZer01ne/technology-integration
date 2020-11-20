@@ -1,4 +1,8 @@
 package com.github.product.constants;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * @author Zer01ne
  * @since 2020/11/18 20:51
@@ -22,4 +26,18 @@ public class ProductConstants {
      */
     public static final String JHS_A = "jhs_a";
     public static final String JHS_B = "jhs_b";
+    /**
+     * 一级缓存PV map
+     */
+    public static final Map<Long, Map<Long, Long>> PV_MAP = new ConcurrentHashMap<>();
+    /**
+     * 一级缓存PV key
+     */
+    public static final String PV_LIST_CACHE = "pv：list";
+    /**
+     * 商品pv key
+     */
+    public static final String PRODUCT_PV = "product:%d";
+
+
 }

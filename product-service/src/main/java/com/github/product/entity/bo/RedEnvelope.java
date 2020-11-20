@@ -14,7 +14,6 @@ import java.util.List;
  * @since 2020/11/19 16:11
  */
 @Data
-@Builder
 public abstract class RedEnvelope {
 
     /**
