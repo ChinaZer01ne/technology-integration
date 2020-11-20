@@ -36,7 +36,7 @@ public class ProductServiceImpl implements ProductService {
      *      2、有没有更好的解决方案？zSet，二级缓存
      */
     @Override
-    public ProductVO view(Long id) {
+    public Boolean view(Long id) {
         // 普通的实现方式，高并发下会有问题
         //return viewNormalImpl(id);
         // 二级缓存的实现方式
@@ -48,9 +48,9 @@ public class ProductServiceImpl implements ProductService {
      * 每次PV操作时，先计算当前时间是哪个时间块，然后存储Map中
      * 时间块：当前时间T/1000*60*60=小时key
      * @param id : 商品id
-     * @return com.github.product.entity.vo.ProductVO
+     * @return java.lang.Boolean
      */
-    private ProductVO viewSecondLevelCacheImpl(Long id) {
+    private Boolean viewSecondLevelCacheImpl(Long id) {
         long timeBlockPerMinutes = System.currentTimeMillis() / (1000 * 60 * 1);
         // Map<时间块，Map<商品id，商品浏览量>>
         Map<Long, Long> viewMap = ProductConstants.PV_MAP.get(timeBlockPerMinutes);
@@ -61,19 +61,25 @@ public class ProductServiceImpl implements ProductService {
             // 合并商品记录
             viewMap.merge(id, 1L, Long::sum);
         }
-        return null;
+        return true;
     }
 
     /**
      * 简单的方式实现浏览量的统计，高并发下会扛不住
      * @param id : 商品id
-     * @return com.github.product.entity.vo.ProductVO
+     * @return java.lang.Boolean
      */
-    private ProductVO viewNormalImpl(Long id) {
-        Long increment = stringRedisTemplate.opsForValue().increment(String.format(ProductConstants.PRODUCT_PV, id));
+    private Boolean viewNormalImpl(Long id) {
+        stringRedisTemplate.opsForValue().increment(String.format(ProductConstants.PRODUCT_PV, id));
+        return true;
+    }
+
+    @Override
+    public ProductVO viewCount(Long id) {
+        String increment = stringRedisTemplate.opsForValue().get(String.format(ProductConstants.PRODUCT_PV, id));
         log.info("商品{}访问量为：{}",id,increment);
         ProductVO productVO = new ProductVO();
-        productVO.setViews(increment);
+        productVO.setViews(Long.valueOf(increment));
         productVO.setId(id);
         productVO.setName("机械键盘");
         return productVO;
