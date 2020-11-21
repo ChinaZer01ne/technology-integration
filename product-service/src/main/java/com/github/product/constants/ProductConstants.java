@@ -51,5 +51,8 @@ public class ProductConstants {
      */
     public static final String LOTTERY_UNREPEATABLE = "lottery:unrepeatable";
 
-
+    /**
+     * 点赞key
+     */
+    public static final String GIVE_LIKE = "give:like";
 }
