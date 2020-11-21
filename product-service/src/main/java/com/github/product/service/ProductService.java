@@ -31,4 +31,10 @@ public interface ProductService {
      * @return java.lang.Object
      */
     ProductVO viewCount(Long id);
+    /**
+     * 是否是黑名单用户
+     * @param userId : 用户id
+     * @return java.lang.Boolean
+     */
+    Boolean isBlack(Long userId);
 }

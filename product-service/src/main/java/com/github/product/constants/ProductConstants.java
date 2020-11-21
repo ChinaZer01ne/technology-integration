@@ -38,6 +38,10 @@ public class ProductConstants {
      * 商品pv key
      */
     public static final String PRODUCT_PV = "product:%d";
+    /**
+     * 评论黑名单集合
+     */
+    public static final String COMMENT_BLACKLIST = "comment:blacklist";
 
 
 }

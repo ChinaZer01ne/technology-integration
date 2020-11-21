@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -28,7 +29,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
-
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
 
     /**
      * 实现方案：redis自增实现PV统计，缺点：频繁修改redis，如果有一万个商品，每个商品有十万次访问，那么就要修改redis上亿次
@@ -83,6 +85,18 @@ public class ProductServiceImpl implements ProductService {
         productVO.setId(id);
         productVO.setName("机械键盘");
         return productVO;
+    }
+
+    @Override
+    public Boolean isBlack(Long userId) {
+        Boolean member = false;
+        try {
+            member = redisTemplate.opsForSet().isMember(ProductConstants.COMMENT_BLACKLIST, userId);
+        }catch (Exception e) {
+            // 走DB查询
+            log.error("走DB查询");
+        }
+        return member;
     }
 
     @Override
