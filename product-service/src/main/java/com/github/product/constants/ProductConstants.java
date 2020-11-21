@@ -42,6 +42,14 @@ public class ProductConstants {
      * 评论黑名单集合
      */
     public static final String COMMENT_BLACKLIST = "comment:blacklist";
+    /**
+     * 可重复抽奖
+     */
+    public static final String LOTTERY_REPEATABLE = "lottery:repeatable";
+    /**
+     * 不可重复抽奖
+     */
+    public static final String LOTTERY_UNREPEATABLE = "lottery:unrepeatable";
 
 
 }
