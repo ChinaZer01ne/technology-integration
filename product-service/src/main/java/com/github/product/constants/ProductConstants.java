@@ -55,4 +55,21 @@ public class ProductConstants {
      * 点赞key
      */
     public static final String GIVE_LIKE = "give:like";
+    /**
+     * topN小时key
+     */
+    public static final String HOUR_KEY = "topN:hour";
+    /**
+     * topN天key
+     */
+    public static final String DAY_KEY = "topN:day";
+    /**
+     * topN周key
+     */
+    public static final String WEEK_KEY = "topN:week";
+    /**
+     * 月topN天key
+     */
+    public static final String MONTH_KEY = "topN:month";
+
 }
