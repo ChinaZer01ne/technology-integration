@@ -10,25 +10,13 @@ import java.util.List;
  */
 public interface ProductService {
 
-    /**
-     * 获取所有商品信息
-     * @return java.util.List<com.github.product.entity.vo.ProductVO> 
-     */
-    List<ProductVO> getAll();
-
-    /**
-     * 获取指定商品
-     * @param id : 主键
-     * @return com.github.product.entity.vo.ProductVO
-     */
-    ProductVO get(Long id);
 
     /**
      * 统计商品的访问量
      * @param id : 主键
      * @return com.github.product.entity.vo.ProductVO
      */
-    ProductVO view(Long id);
+    Boolean view(Long id);
 
     /**
      * 商品变价
@@ -37,4 +25,16 @@ public interface ProductService {
      * @return java.lang.Boolean
      */
     Boolean changPrice(Long id, Integer price);
+    /**
+     * 查看pv访问量
+     * @param id :
+     * @return java.lang.Object
+     */
+    ProductVO viewCount(Long id);
+    /**
+     * 是否是黑名单用户
+     * @param userId : 用户id
+     * @return java.lang.Boolean
+     */
+    Boolean isBlack(Long userId);
 }

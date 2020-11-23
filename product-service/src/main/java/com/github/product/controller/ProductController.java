@@ -26,8 +26,14 @@ public class ProductController {
 
     @ApiOperation("商品浏览量统计/文章浏览量统计")
     @GetMapping("/view")
-    public ServerResponse<ProductVO> view(@ApiParam("主键") @RequestParam("id") Long id){
+    public ServerResponse<Boolean> view(@ApiParam("主键") @RequestParam("id") Long id){
         return ServerResponse.success(productService.view(id));
+    }
+
+    @ApiOperation("查看商品浏览量/查看文章浏览量")
+    @GetMapping("/view/count")
+    public ServerResponse<ProductVO> viewCount(@ApiParam("主键") @RequestParam("id") Long id){
+        return ServerResponse.success(productService.viewCount(id));
     }
 
     @ApiOperation("商品变价")
@@ -36,15 +42,4 @@ public class ProductController {
         return ServerResponse.success(productService.changPrice(id, price));
     }
 
-    @ApiOperation("获取所有商品")
-    @GetMapping("/list")
-    public ServerResponse<List<ProductVO>> getAll(){
-        return ServerResponse.success(productService.getAll());
-    }
-
-    @ApiOperation("获取指定商品")
-    @GetMapping("/get")
-    public ServerResponse<ProductVO> get(@ApiParam("主键") @RequestParam("id") Long id){
-        return ServerResponse.success(productService.get(id));
-    }
 }
