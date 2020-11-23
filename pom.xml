@@ -111,6 +111,7 @@
         <module>common</module>
         <module>internal-api</module>
         <module>product-service</module>
+        <module>user-service</module>
         <module>service-register-center</module>
     </modules>
 </project>
