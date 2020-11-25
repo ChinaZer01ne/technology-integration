@@ -14,4 +14,10 @@ public interface UserService {
      * @return com.github.user.entity.User
      */
     User get(Long id);
+    /**
+     * 获取用户信息
+     * @param username : 用户名
+     * @return com.github.user.entity.User
+     */
+    User get(String username);
 }

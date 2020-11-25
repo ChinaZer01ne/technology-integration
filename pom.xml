@@ -23,6 +23,8 @@
         <springcache.version>2.2.2.RELEASE</springcache.version>
         <local.version>0.0.1-SNAPSHOT</local.version>
         <spring-cloud.version>2020.0.0-M5</spring-cloud.version>
+        <mysql.version>8.0.19</mysql.version>
+        <mybatis.version>2.1.1</mybatis.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -81,7 +83,16 @@
                 <artifactId>common</artifactId>
                 <version>${local.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -113,5 +124,6 @@
         <module>product-service</module>
         <module>user-service</module>
         <module>service-register-center</module>
+        <module>authentication-server</module>
     </modules>
 </project>
