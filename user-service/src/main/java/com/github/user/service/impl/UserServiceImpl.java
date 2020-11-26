@@ -18,11 +18,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User get(Long id) {
-        return null;
+        return userMapper.selectById(id);
     }
 
     @Override
     public User get(String username) {
-        return null;
+        return userMapper.selectByUsername(username);
     }
 }
