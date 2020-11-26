@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author peach
  * @since 2020/11/26 16:09
  */
-@FeignClient("user-service")
+@FeignClient(name = "user-service")
 @RequestMapping("/internal/user")
-public interface UserService {
+public interface UserClient {
 
     /**
      * 根据用户名获取密码

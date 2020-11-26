@@ -12,9 +12,9 @@ import java.util.List;
  * @author peach
  * @since 2020/11/26 16:42
  */
-@FeignClient("user-service")
+@FeignClient(name = "permission-service")
 @RequestMapping("/internal/permission")
-public interface PermissionService {
+public interface PermissionClient {
 
     /**
      * 获取用户权限信息

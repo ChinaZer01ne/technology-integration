@@ -1,14 +1,20 @@
 package com.github.user.controller.internal;
 
-import com.github.internal.api.user.dto.UserDTO;
-import com.github.user.entity.User;
-import com.github.user.service.UserService;
+import com.github.internal.api.user.PermissionClient;
+import com.github.internal.api.user.dto.PermissionDTO;
+import com.github.user.entity.Permission;
+import com.github.user.service.PermissionService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author peach
@@ -19,13 +25,20 @@ import org.springframework.web.bind.annotation.RestController;
 public class InnerPermissionController {
 
     @Autowired
-    private UserService userService;
+    private PermissionService permissionService;
 
     @GetMapping("/get")
-    public UserDTO get(@RequestParam("username") String username) {
-        User user = userService.get(username);
-        UserDTO userDto = new UserDTO();
-        BeanUtils.copyProperties(user, userDto);
-        return userDto;
+    public List<PermissionDTO> get(@RequestParam("userId") Long userId) {
+        List<Permission> permissions = permissionService.get(userId);
+
+        List<PermissionDTO> result = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(permissions)) {
+            for (Permission permission : permissions) {
+                PermissionDTO permissionDTO = new PermissionDTO();
+                BeanUtils.copyProperties(permission, permissionDTO);
+                result.add(permissionDTO);
+            }
+        }
+        return result;
     }
 }

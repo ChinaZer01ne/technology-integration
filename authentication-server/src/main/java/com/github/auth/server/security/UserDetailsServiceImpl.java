@@ -1,7 +1,7 @@
 package com.github.auth.server.security;
 
-import com.github.internal.api.user.PermissionService;
-import com.github.internal.api.user.UserService;
+import com.github.internal.api.user.PermissionClient;
+import com.github.internal.api.user.UserClient;
 import com.github.internal.api.user.dto.PermissionDTO;
 import com.github.internal.api.user.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,19 +26,19 @@ import java.util.stream.Collectors;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private UserService userService;
+    private UserClient userClient;
     @Autowired
-    private PermissionService permissionService;
+    private PermissionClient permissionClient;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDTO user = userService.get(username);
+        UserDTO user = userClient.get(username);
         if (user == null) {
             return User.builder().build();
         }
 
         // 获取用户授权
-        List<PermissionDTO> permissions = permissionService.get(user.getId());
+        List<PermissionDTO> permissions = permissionClient.get(user.getId());
         // 权限集合
         List<GrantedAuthority> grantedAuthorities = permissions.stream().map(permission -> {
             if (permission != null && permission.getEnName() != null) {

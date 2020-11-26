@@ -24,7 +24,7 @@
         <local.version>0.0.1-SNAPSHOT</local.version>
         <spring-cloud.version>2020.0.0-M5</spring-cloud.version>
         <mysql.version>8.0.19</mysql.version>
-        <mybatis.version>2.1.1</mybatis.version>
+        <mybatis.version>2.1.4</mybatis.version>
         <mybatis-plus.version>3.4.1</mybatis-plus.version>
     </properties>
     <dependencyManagement>

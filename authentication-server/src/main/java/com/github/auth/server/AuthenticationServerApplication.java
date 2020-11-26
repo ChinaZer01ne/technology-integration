@@ -9,7 +9,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @author peach
  * @since 2020/11/25 9:52
  */
-@EnableFeignClients
+@EnableFeignClients(basePackages = "com.github.internal.api")
 @EnableDiscoveryClient
 @SpringBootApplication
 public class AuthenticationServerApplication {
