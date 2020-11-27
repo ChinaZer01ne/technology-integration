@@ -145,5 +145,6 @@
         <module>user-service</module>
         <module>service-register-center</module>
         <module>authentication-server</module>
+        <module>micro-service-gateway</module>
     </modules>
 </project>

@@ -6,6 +6,8 @@ import com.github.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author peach
  * @since 2020/11/23 17:20
@@ -24,5 +26,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User get(String username) {
         return userMapper.selectByUsername(username);
+    }
+
+    @Override
+    public List<User> list() {
+        return userMapper.selectList(null);
     }
 }

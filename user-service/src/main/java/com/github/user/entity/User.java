@@ -1,6 +1,9 @@
 package com.github.user.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
@@ -9,6 +12,7 @@ import java.time.LocalDateTime;
  * @since 2020/11/23 17:21
  */
 @Data
+@TableName("t_user")
 public class User {
 
     /**

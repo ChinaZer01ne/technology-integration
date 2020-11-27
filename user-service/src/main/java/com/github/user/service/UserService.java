@@ -2,6 +2,8 @@ package com.github.user.service;
 
 import com.github.user.entity.User;
 
+import java.util.List;
+
 /**
  * @author peach
  * @since 2020/11/23 17:19
@@ -20,4 +22,10 @@ public interface UserService {
      * @return com.github.user.entity.User
      */
     User get(String username);
+
+    /**
+     * 查询用户列表
+     * @return java.util.List<com.github.user.entity.User>
+     */
+    List<User> list();
 }
