@@ -1,4 +1,4 @@
-package com.github.order.service;
+package com.github.order;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
