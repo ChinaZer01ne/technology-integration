@@ -152,5 +152,8 @@
         <module>service-register-center</module>
         <module>authentication-server</module>
         <module>micro-service-gateway</module>
+        <module>order-service</module>
+        <module>stock-service</module>
+        <module>pay-service</module>
     </modules>
 </project>
