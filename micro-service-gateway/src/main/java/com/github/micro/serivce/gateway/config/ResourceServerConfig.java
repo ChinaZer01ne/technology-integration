@@ -1,0 +1,60 @@
+package com.github.micro.serivce.gateway.config;
+
+import com.github.micro.serivce.gateway.auth.CustomizedAccessDeniedHandler;
+import com.github.micro.serivce.gateway.auth.CustomizedAuthenticationEntryPoint;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authorization.ReactiveAuthorizationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.web.server.SecurityWebFilterChain;
+
+/**
+ * @author Zer01ne
+ * @since 2020/11/27 20:09
+ */
+@Configuration
+@EnableWebFluxSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
+public class ResourceServerConfig {
+
+    @Autowired
+    private ReactiveAuthorizationManager reactiveAuthorizationManager;
+
+    @Bean
+    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity httpSecurity) {
+        //httpSecurity.oauth2ResourceServer().jwt();
+        //        .jwtAuthenticationConverter(jwtAuthenticationConverter());
+        httpSecurity.authorizeExchange()
+                // 白名单
+                .pathMatchers("/auth/**").permitAll()
+                // 鉴权管理器配置
+                .anyExchange().access(reactiveAuthorizationManager)
+                .and().exceptionHandling()
+                // 处理未授权
+                .accessDeniedHandler(new CustomizedAccessDeniedHandler())
+                //.accessDeniedHandler(new HttpStatusServerAccessDeniedHandler(HttpStatus.INTERNAL_SERVER_ERROR))
+                //.accessDeniedHandler(new ServerWebExchangeDelegatingServerAccessDeniedHandler(new ServerWebExchangeDelegatingServerAccessDeniedHandler.DelegateEntry()))
+                // 处理匿名访问
+                .authenticationEntryPoint(new CustomizedAuthenticationEntryPoint())
+                //.authenticationEntryPoint(new RedirectServerAuthenticationEntryPoint("http://www.baidu.com"))
+                //.authenticationEntryPoint(new HttpBasicServerAuthenticationEntryPoint())
+                //.authenticationEntryPoint(new HttpStatusServerEntryPoint(HttpStatus.OK))
+                //.authenticationEntryPoint(new DelegatingServerAuthenticationEntryPoint(new DelegatingServerAuthenticationEntryPoint.DelegateEntry()))
+                .and().csrf().disable();
+        return httpSecurity.build();
+
+    }
+
+    //@Bean
+    //public Converter<Jwt, ? extends Mono<? extends AbstractAuthenticationToken>> jwtAuthenticationConverter() {
+    //    JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
+    //    jwtGrantedAuthoritiesConverter.setAuthorityPrefix(AuthConstant.AUTHORITY_PREFIX);
+    //    jwtGrantedAuthoritiesConverter.setAuthoritiesClaimName(AuthConstant.AUTHORITY_CLAIM_NAME);
+    //    JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
+    //    jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter);
+    //    return new ReactiveJwtAuthenticationConverterAdapter(jwtAuthenticationConverter);
+    //}
+}
