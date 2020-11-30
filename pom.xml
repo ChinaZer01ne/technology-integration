@@ -29,6 +29,7 @@
     </properties>
     <dependencyManagement>
         <dependencies>
+            <!-- web -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
@@ -46,6 +47,7 @@
                 <scope>runtime</scope>
                 <optional>true</optional>
             </dependency>
+            <!-- lombok -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
@@ -73,6 +75,7 @@
                 <artifactId>springfox-boot-starter</artifactId>
                 <version>${swagger.version}</version>
             </dependency>
+            <!-- cache -->
             <dependency>
                 <groupId>com.github</groupId>
                 <artifactId>peach-cache</artifactId>
