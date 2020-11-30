@@ -47,10 +47,10 @@ public class ServerResponse<T> {
     }
 
     public static <T> ServerResponse<T> fail(String message) {
-        return success(CommonServerResponseEnum.FAIL.getCode(), CommonServerResponseEnum.FAIL.getMessage(), null);
+        return fail(CommonServerResponseEnum.FAIL.getCode(), message, null);
     }
 
     public static <T> ServerResponse<T> fail(ServerResponseEnum responseEnum) {
-        return success(responseEnum.getCode(), responseEnum.getMessage(),null);
+        return fail(responseEnum.getCode(), responseEnum.getMessage(),null);
     }
 }

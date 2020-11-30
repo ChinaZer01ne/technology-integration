@@ -1,6 +1,12 @@
 package com.github.micro.serivce.gateway.auth;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.common.ServerResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.buffer.DataBufferFactory;
+import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.server.authorization.ServerAccessDeniedHandler;
@@ -17,6 +23,10 @@ import reactor.core.publisher.MonoSink;
 @Slf4j
 @Component
 public class CustomizedAccessDeniedHandler implements ServerAccessDeniedHandler {
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @Override
     public Mono<Void> handle(ServerWebExchange serverWebExchange, AccessDeniedException e) {
         log.info(e.getMessage());
@@ -24,6 +34,17 @@ public class CustomizedAccessDeniedHandler implements ServerAccessDeniedHandler 
         response.writeAndFlushWith(subscriber -> {
             subscriber.onError(e);
         });
-        return Mono.create(MonoSink::success);
+
+        response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
+        return response.writeWith(Mono.fromSupplier(() -> {
+            DataBufferFactory bufferFactory = response.bufferFactory();
+            try {
+                return bufferFactory.wrap(objectMapper.writeValueAsBytes(ServerResponse.fail("无权限")));
+            } catch (JsonProcessingException ex) {
+                log.error("Error writing response", ex);
+                return bufferFactory.wrap(new byte[0]);
+            }
+        }));
+        //return Mono.create(MonoSink::success);
     }
 }

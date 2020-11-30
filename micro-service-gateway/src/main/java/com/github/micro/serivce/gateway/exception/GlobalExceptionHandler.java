@@ -18,18 +18,16 @@ import org.springframework.web.server.handler.ResponseStatusExceptionHandler;
 import reactor.core.publisher.Mono;
 
 /**
- * 网关异常通用处理器，只作用在webflux 环境下 , 优先级低于 {@link ResponseStatusExceptionHandler} 执行
- *
- * @author 冷酱
- * @date 2020/5/26
+ * 网关异常通用处理器
+ * @author Zer01ne
+ * @since 2020/11/30 21:28
  */
 @Slf4j
 @Order(-1)
 @Configuration
-@RequiredArgsConstructor
 public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
 
-    private final ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public Mono<Void> handle(ServerWebExchange exchange, Throwable ex) {
@@ -49,8 +47,7 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
             DataBufferFactory bufferFactory = response.bufferFactory();
             try {
                 return bufferFactory.wrap(objectMapper.writeValueAsBytes(ServerResponse.fail(ex.getMessage())));
-            }
-            catch (JsonProcessingException e) {
+            } catch (JsonProcessingException e) {
                 log.error("Error writing response", ex);
                 return bufferFactory.wrap(new byte[0]);
             }

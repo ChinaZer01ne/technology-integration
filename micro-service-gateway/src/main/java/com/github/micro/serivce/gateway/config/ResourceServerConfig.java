@@ -32,8 +32,8 @@ public class ResourceServerConfig {
 
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity httpSecurity) {
-        //httpSecurity.oauth2ResourceServer().jwt();
-        //        .jwtAuthenticationConverter(jwtAuthenticationConverter());
+        httpSecurity.oauth2ResourceServer().jwt()
+                .jwtAuthenticationConverter(jwtAuthenticationConverter());
         httpSecurity.authorizeExchange()
                 // 白名单
                 .pathMatchers("/auth/**").permitAll()
