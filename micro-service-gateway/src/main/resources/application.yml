@@ -16,18 +16,12 @@ spring:
           uri: http://localhost:9091
           predicates:
             - Path=/auth/**
-          filters:
-            - StripPrefix=1
         - id: user-route
           uri: http://localhost:9092
           predicates:
             - Path=/user/**
-          filters:
-            - StripPrefix=1
         - id: product-route
           uri: http://localhost:9093
           predicates:
             - Path=/product/**
-          filters:
-            - StripPrefix=1
 

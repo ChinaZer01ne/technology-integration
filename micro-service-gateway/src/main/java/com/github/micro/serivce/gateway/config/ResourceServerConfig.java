@@ -1,5 +1,6 @@
 package com.github.micro.serivce.gateway.config;
 
+import com.github.micro.serivce.gateway.auth.AuthorizationManager;
 import com.github.micro.serivce.gateway.auth.CustomizedAccessDeniedHandler;
 import com.github.micro.serivce.gateway.auth.CustomizedAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,18 +28,15 @@ import reactor.core.publisher.Mono;
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class ResourceServerConfig {
 
-    @Autowired
-    private ReactiveAuthorizationManager reactiveAuthorizationManager;
-
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity httpSecurity) {
-        httpSecurity.oauth2ResourceServer().jwt()
-                .jwtAuthenticationConverter(jwtAuthenticationConverter());
+        //httpSecurity.oauth2ResourceServer().jwt()
+        //        .jwtAuthenticationConverter(jwtAuthenticationConverter());
         httpSecurity.authorizeExchange()
                 // 白名单
-                .pathMatchers("/auth/**").permitAll()
+                .pathMatchers("/auth/**", "/user/**").permitAll()
                 // 鉴权管理器配置
-                .anyExchange().access(reactiveAuthorizationManager)
+                .anyExchange().access(new AuthorizationManager())
                 .and().exceptionHandling()
                 // 处理未授权
                 .accessDeniedHandler(new CustomizedAccessDeniedHandler())
