@@ -34,7 +34,12 @@ public class ResourceServerConfig {
         //        .jwtAuthenticationConverter(jwtAuthenticationConverter());
         httpSecurity.authorizeExchange()
                 // 白名单
-                .pathMatchers("/auth/**", "/user/**").permitAll()
+                .pathMatchers("/auth/**").permitAll()
+                //.pathMatchers("/user/**").permitAll()
+                // swagger相关
+                .pathMatchers("/swagger-ui/**").permitAll()
+                .pathMatchers("/swagger-resources/**").permitAll()
+                .pathMatchers("/v3/**").permitAll()
                 // 鉴权管理器配置
                 .anyExchange().access(new AuthorizationManager())
                 .and().exceptionHandling()
