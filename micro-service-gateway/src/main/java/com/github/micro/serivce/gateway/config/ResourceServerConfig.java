@@ -35,7 +35,7 @@ public class ResourceServerConfig {
         httpSecurity.authorizeExchange()
                 // 白名单
                 .pathMatchers("/auth/**").permitAll()
-                //.pathMatchers("/user/**").permitAll()
+                .pathMatchers("/user/**").permitAll()
                 // swagger相关
                 .pathMatchers("/swagger-ui/**").permitAll()
                 .pathMatchers("/swagger-resources/**").permitAll()

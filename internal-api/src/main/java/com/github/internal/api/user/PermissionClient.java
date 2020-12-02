@@ -12,7 +12,7 @@ import java.util.List;
  * @author peach
  * @since 2020/11/26 16:42
  */
-@FeignClient(name = "permission-service")
+@FeignClient(name = "user-service", contextId = "permissionClient")
 @RequestMapping("/internal/permission")
 public interface PermissionClient {
 

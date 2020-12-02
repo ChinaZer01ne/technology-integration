@@ -46,6 +46,10 @@
             <groupId>com.github</groupId>
             <artifactId>internal-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
     </dependencies>
 
 

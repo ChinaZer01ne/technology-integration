@@ -1,4 +1,4 @@
-package com.github.micro.serivce.gateway.filter;
+package com.github.micro.serivce.gateway.auth;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;

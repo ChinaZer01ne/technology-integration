@@ -2,7 +2,9 @@ package com.github.user.controller;
 
 import com.github.user.entity.User;
 import com.github.user.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +18,7 @@ import java.util.List;
  * @author peach
  * @since 2020/11/26 16:05
  */
+@Slf4j
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -23,6 +26,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Value("${server.port}")
+    private String port;
     /**
      * 获取用户
      * @param username :
@@ -30,6 +35,7 @@ public class UserController {
      */
     @GetMapping("/get")
     public Mono<User> get(@RequestParam("username") String username) {
+        log.error(port);
         return Mono.create(userMonoSink -> {
             User user = userService.get(username);
             userMonoSink.success(user);
