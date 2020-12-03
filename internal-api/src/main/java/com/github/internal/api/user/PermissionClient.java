@@ -2,10 +2,8 @@ package com.github.internal.api.user;
 
 import com.github.internal.api.user.dto.PermissionDTO;
 import com.github.internal.api.user.fallback.PermissionClientFallback;
-import com.github.internal.api.user.fallback.UserClientFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;

@@ -7,7 +7,7 @@
 		<artifactId>technology-integration</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>micro-serivce-gateway</artifactId>
+	<artifactId>micro-service-gateway</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>micro-service-gateway</name>
 	<description>Gateway for project.</description>
@@ -57,7 +57,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.github</groupId>
-			<artifactId>common</artifactId>
+			<artifactId>common-core</artifactId>
 		</dependency>
 	</dependencies>
 

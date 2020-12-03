@@ -1,6 +1,6 @@
 package com.github.product.controller;
 
-import com.github.common.ServerResponse;
+import com.github.common.core.ServerResponse;
 import com.github.product.entity.Lottery;
 import com.github.product.service.LotteryService;
 import io.swagger.annotations.ApiOperation;

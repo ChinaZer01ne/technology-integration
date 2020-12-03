@@ -1,7 +1,7 @@
 package com.github.product.entity.bo;
 
-import com.github.common.exception.Assert;
-import com.github.common.exception.CommonException;
+import com.github.common.core.exception.Assert;
+import com.github.common.core.exception.CommonException;
 import com.github.product.enums.ProductServerResponseEnum;
 import com.github.product.enums.RedEnvelopeEnum;
 import lombok.Data;

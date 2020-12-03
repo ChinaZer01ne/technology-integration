@@ -1,6 +1,5 @@
 package com.github.user.service.impl;
 
-import com.github.internal.api.user.dto.PermissionDTO;
 import com.github.user.entity.Permission;
 import com.github.user.mapper.PermissionMapper;
 import com.github.user.service.PermissionService;

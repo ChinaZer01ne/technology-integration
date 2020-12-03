@@ -1,20 +1,17 @@
 package com.github.product.service.impl;
 
 import com.github.product.constants.ProductConstants;
-import com.github.product.utils.BeanUtils;
 import com.github.product.entity.vo.ProductVO;
 import com.github.product.service.ProductService;
+import com.github.product.utils.BeanUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 

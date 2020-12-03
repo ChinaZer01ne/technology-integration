@@ -1,6 +1,5 @@
 package com.github.user.controller.internal;
 
-import com.github.internal.api.user.PermissionClient;
 import com.github.internal.api.user.dto.PermissionDTO;
 import com.github.user.entity.Permission;
 import com.github.user.service.PermissionService;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**

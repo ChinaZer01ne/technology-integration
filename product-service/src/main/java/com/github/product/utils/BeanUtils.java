@@ -1,7 +1,5 @@
 package com.github.product.utils;
 
-import com.github.product.entity.vo.ProductVO;
-
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;

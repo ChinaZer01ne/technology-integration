@@ -3,41 +3,25 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.4.0</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<groupId>com.github</groupId>
+		<artifactId>technology-integration</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>com.github</groupId>
-	<artifactId>common-hystrix</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>common-hystrix</name>
-	<description>Hystrix Moudle</description>
+
+	<artifactId>common</artifactId>
+
+	<description>Common Module</description>
+
+	<packaging>pom</packaging>
 
 	<properties>
 		<java.version>11</java.version>
 	</properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+	<modules>
+		<module>common-hystrix</module>
+		<module>common-bom</module>
+		<module>common-core</module>
+	</modules>
 
 </project>

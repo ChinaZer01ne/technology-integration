@@ -87,11 +87,6 @@
                 <version>${springcache.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.github</groupId>
-                <artifactId>common</artifactId>
-                <version>${local.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.version}</version>
@@ -129,6 +124,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- spring-cloud-alibaba-dependencies -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
@@ -136,11 +132,19 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
+            <!-- spring-cloud-commons-dependencies -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-commons-dependencies</artifactId>
                 <version>2.2.4.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- common-dependencies -->
+            <dependency>
+                <groupId>com.github</groupId>
+                <artifactId>common-bom</artifactId>
+                <version>${local.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

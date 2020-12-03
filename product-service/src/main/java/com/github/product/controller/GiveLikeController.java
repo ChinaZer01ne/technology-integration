@@ -1,6 +1,6 @@
 package com.github.product.controller;
 
-import com.github.common.ServerResponse;
+import com.github.common.core.ServerResponse;
 import com.github.product.entity.vo.GiveLikeVO;
 import com.github.product.service.GiveLikeService;
 import io.swagger.annotations.ApiParam;

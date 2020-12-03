@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.github</groupId>
+  <artifactId>common-bom</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <name>common-bom</name>
+  <description>公共依赖管理</description>
+
+  <developers>
+    <developer>
+      <name>peach</name>
+      <email>suprepasslion@gmail.com</email>
+    </developer>
+  </developers>
+
+  <properties>
+    <local.version>0.0.1-SNAPSHOT</local.version>
+    <jsr310.version>2.11.3</jsr310.version>
+  </properties>
+
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.github</groupId>
+        <artifactId>common-core</artifactId>
+        <version>${local.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github</groupId>
+        <artifactId>common-hystrix</artifactId>
+        <version>${local.version}</version>
+      </dependency>
+      <!-- json序列化-->
+      <dependency>
+        <groupId>com.fasterxml.jackson.datatype</groupId>
+        <artifactId>jackson-datatype-jsr310</artifactId>
+        <version>${jsr310.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+</project>

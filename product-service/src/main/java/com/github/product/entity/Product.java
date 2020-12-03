@@ -1,6 +1,5 @@
 package com.github.product.entity;
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**

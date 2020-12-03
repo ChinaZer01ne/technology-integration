@@ -1,9 +1,7 @@
 package com.github.internal.api.user.fallback;
 
 import com.github.internal.api.user.PermissionClient;
-import com.github.internal.api.user.UserClient;
 import com.github.internal.api.user.dto.PermissionDTO;
-import com.github.internal.api.user.dto.UserDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

@@ -1,17 +1,11 @@
 package com.github.product.service.impl;
 
-import com.github.common.CommonServerResponseEnum;
-import com.github.common.ServerResponseEnum;
-import com.github.common.exception.Assert;
 import com.github.product.entity.bo.RedEnvelope;
-import com.github.product.enums.ProductServerResponseEnum;
 import com.github.product.service.RedEnvelopeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 

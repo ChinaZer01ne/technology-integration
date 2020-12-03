@@ -2,8 +2,6 @@ package com.github.product.service;
 
 import com.github.product.entity.vo.ProductVO;
 
-import java.util.List;
-
 /**
  * @author Zer01ne
  * @since 2020/11/15 19:04

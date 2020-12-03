@@ -1,6 +1,7 @@
 package com.github.product.enums;
 
-import com.github.common.ServerResponseEnum;
+
+import com.github.common.core.ServerResponseEnum;
 
 /**
  * @author peach

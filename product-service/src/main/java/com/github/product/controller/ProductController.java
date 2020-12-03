@@ -1,14 +1,11 @@
 package com.github.product.controller;
 
-import com.github.common.ServerResponse;
+import com.github.common.core.ServerResponse;
 import com.github.product.entity.vo.ProductVO;
 import com.github.product.service.ProductService;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * @author Zer01ne
