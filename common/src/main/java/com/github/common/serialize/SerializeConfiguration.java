@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter;
  *  2、配置ObjectMapper
  *
  * 全局序列话的东西不一定每个微服务都要使用，独立于common包会更好。
- * @author peach 
+ * @author peach
  * @since 2020/12/1 15:40
  */
 @Configuration

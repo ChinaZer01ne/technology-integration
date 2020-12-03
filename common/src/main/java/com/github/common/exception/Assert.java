@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.function.Supplier;
 /**
- * @author peach 
+ * @author peach
  * @since 2020/12/2 15:09
  */
 public abstract class Assert {

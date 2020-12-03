@@ -1,6 +1,8 @@
 package com.github.internal.api.user;
 
 import com.github.internal.api.user.dto.PermissionDTO;
+import com.github.internal.api.user.fallback.PermissionClientFallback;
+import com.github.internal.api.user.fallback.UserClientFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +14,7 @@ import java.util.List;
  * @author peach
  * @since 2020/11/26 16:42
  */
-@FeignClient(name = "user-service", contextId = "permissionClient")
-@RequestMapping("/internal/permission")
+@FeignClient(name = "user-service", contextId = "permissionClient", fallback = PermissionClientFallback.class)
 public interface PermissionClient {
 
     /**
@@ -21,6 +22,6 @@ public interface PermissionClient {
      * @param userId :
      * @return java.util.List<com.github.internal.api.user.dto.PermissionDTO>
      */
-    @GetMapping("/get")
+    @GetMapping("/internal/permission/get")
     List<PermissionDTO> get(@RequestParam("userId") Long userId);
 }

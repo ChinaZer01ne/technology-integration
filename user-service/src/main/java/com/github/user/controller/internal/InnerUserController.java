@@ -23,6 +23,7 @@ public class InnerUserController {
 
     @GetMapping("/get")
     public UserDTO get(@RequestParam("username") String username) {
+        int i = 1/0;
         User user = userService.get(username);
         UserDTO userDto = new UserDTO();
         BeanUtils.copyProperties(user, userDto);
