@@ -23,6 +23,7 @@
 		<module>common-bom</module>
 		<module>common-core</module>
 		<module>common-upload</module>
-	</modules>
+        <module>common-sync</module>
+    </modules>
 
 </project>
