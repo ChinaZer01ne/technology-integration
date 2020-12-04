@@ -13,15 +13,18 @@ spring:
     gateway:
       routes:
         - id: auth-route
-          uri: http://localhost:9091
+          # 负载均衡，动态路由
+          uri: lb://oauth2-server
           predicates:
             - Path=/auth/**
         - id: user-route
-          uri: http://localhost:9092
+          # 负载均衡，动态路由
+          uri: lb://user-service
           predicates:
             - Path=/user/**
         - id: product-route
-          uri: http://localhost:9093
+          # 负载均衡，动态路由
+          uri: lb://product-service
           predicates:
             - Path=/product/**
 

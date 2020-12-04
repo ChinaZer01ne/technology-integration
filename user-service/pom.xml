@@ -62,7 +62,7 @@
         </dependency>
         <dependency>
             <groupId>com.github</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>common-core</artifactId>
         </dependency>
     </dependencies>
 
