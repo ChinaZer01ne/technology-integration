@@ -22,6 +22,7 @@
 		<module>common-hystrix</module>
 		<module>common-bom</module>
 		<module>common-core</module>
+		<module>common-upload</module>
 	</modules>
 
 </project>
