@@ -34,6 +34,11 @@ public class UserController {
     @GetMapping("/get")
     public Mono<User> get(@RequestParam("username") String username) {
         log.error(port);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return Mono.create(userMonoSink -> {
             User user = userService.get(username);
             userMonoSink.success(user);
