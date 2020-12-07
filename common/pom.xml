@@ -24,6 +24,7 @@
 		<module>common-core</module>
 		<module>common-upload</module>
         <module>common-sync</module>
+        <module>common-sentinel</module>
     </modules>
 
 </project>

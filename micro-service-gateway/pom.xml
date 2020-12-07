@@ -60,9 +60,14 @@
 			<artifactId>common-core</artifactId>
 		</dependency>
 		<!-- 熔断 -->
+<!--		<dependency>-->
+<!--			<groupId>com.github</groupId>-->
+<!--			<artifactId>common-hystrix</artifactId>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>com.github</groupId>
-			<artifactId>common-hystrix</artifactId>
+			<artifactId>common-sentinel</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 

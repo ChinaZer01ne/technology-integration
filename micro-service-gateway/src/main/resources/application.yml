@@ -29,10 +29,10 @@ spring:
                 # 优先找网关的跳转端点
                 fallbackUri: forward:/fallback
         # 如果网关没有forward:/fallback的端点，那么可以指定存在跳转端点的位置
-        - id: ingredients-fallback
-          uri: http://localhost:9092
-          predicates:
-            - Path=/fallback
+#        - id: ingredients-fallback
+#          uri: http://localhost:9092
+#          predicates:
+#            - Path=/fallback
         - id: product-route
           # 负载均衡，动态路由
           uri: lb://product-service
