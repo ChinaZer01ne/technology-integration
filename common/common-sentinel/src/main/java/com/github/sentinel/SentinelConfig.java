@@ -7,9 +7,15 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.logging.Logger;
 import org.mybatis.logging.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -28,7 +34,7 @@ import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 @Configuration
 public class SentinelConfig {
 
-    @ConditionalOnClass(name = {"org.springframework.boot.web.reactive.context.ReactiveWebApplicationContext"})
+    @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.REACTIVE)
     @Bean
     public BlockRequestHandler blockRequestHandler() {
         return new BlockRequestHandler() {
@@ -41,7 +47,7 @@ public class SentinelConfig {
         };
     }
 
-    @ConditionalOnClass(name = {"org.springframework.web.context.WebApplicationContext"})
+    @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
     @Bean
     public BlockExceptionHandler blockExceptionHandler() {
         return new BlockExceptionHandler() {

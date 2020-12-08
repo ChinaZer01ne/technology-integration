@@ -1,9 +1,11 @@
 package com.github.micro.service.gateway;
 
+import com.github.sentinel.SentinelConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
@@ -14,6 +16,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
  */
 @EnableDiscoveryClient
 @SpringBootApplication
+@Import(SentinelConfig.class)
 public class MicroServiceGatewayApplication {
 
 	public static void main(String[] args) {

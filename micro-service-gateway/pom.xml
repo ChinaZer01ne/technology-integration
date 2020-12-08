@@ -59,15 +59,19 @@
 			<groupId>com.github</groupId>
 			<artifactId>common-core</artifactId>
 		</dependency>
-		<!-- 熔断 -->
+		<!-- 熔断 hystrix -->
 <!--		<dependency>-->
 <!--			<groupId>com.github</groupId>-->
 <!--			<artifactId>common-hystrix</artifactId>-->
 <!--		</dependency>-->
+		<!-- 熔断 sentinel -->
 		<dependency>
 			<groupId>com.github</groupId>
 			<artifactId>common-sentinel</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
 		</dependency>
 	</dependencies>
 

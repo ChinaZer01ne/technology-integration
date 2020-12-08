@@ -24,8 +24,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Value("${server.port}")
-    private String port;
     /**
      * 获取用户
      * @param username :
@@ -33,12 +31,7 @@ public class UserController {
      */
     @GetMapping("/get")
     public Mono<User> get(@RequestParam("username") String username) {
-        log.error(port);
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        int i = 1/0;
         return Mono.create(userMonoSink -> {
             User user = userService.get(username);
             userMonoSink.success(user);

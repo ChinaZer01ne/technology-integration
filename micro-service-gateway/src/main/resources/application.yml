@@ -22,12 +22,13 @@ spring:
           uri: lb://user-service
           predicates:
             - Path=/user/**
-          filters:
-            - name: Hystrix
-              args:
-                name: fetchIngredients
-                # 优先找网关的跳转端点
-                fallbackUri: forward:/fallback
+# spring gateway整合 hystrix
+#          filters:
+#            - name: Hystrix
+#              args:
+#                name: fetchIngredients
+#                # 优先找网关的跳转端点
+#                fallbackUri: forward:/fallback
         # 如果网关没有forward:/fallback的端点，那么可以指定存在跳转端点的位置
 #        - id: ingredients-fallback
 #          uri: http://localhost:9092
@@ -38,7 +39,13 @@ spring:
           uri: lb://product-service
           predicates:
             - Path=/product/**
-
+    # Sentinel 配置项，对应 SentinelProperties 配置属性类
+    sentinel:
+      enabled: true # 是否开启。默认为 true 开启
+      transport:
+        dashboard: 127.0.0.1:7070 # Sentinel 控制台地址
+      filter:
+        url-patterns: /** # 拦截请求的地址。默认为 /*
 
 #设置hystrix的熔断时间
 hystrix:
