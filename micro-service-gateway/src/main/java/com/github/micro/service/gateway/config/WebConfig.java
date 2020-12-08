@@ -9,8 +9,8 @@ import org.springframework.web.reactive.config.EnableWebFlux;
  * @since 2020/12/1 11:06
  */
 @Slf4j
-@Configuration
-@EnableWebFlux
+//@Configuration
+//@EnableWebFlux
 public class WebConfig {
 
 }

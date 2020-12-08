@@ -41,18 +41,31 @@ spring:
             - Path=/product/**
     # Sentinel 配置项，对应 SentinelProperties 配置属性类
     sentinel:
-      enabled: true # 是否开启。默认为 true 开启
       transport:
-        dashboard: 127.0.0.1:7070 # Sentinel 控制台地址
+        dashboard: 127.0.0.1:8080 # Sentinel 控制台地址
       filter:
-        url-patterns: /** # 拦截请求的地址。默认为 /*
-
-#设置hystrix的熔断时间
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            #设置API网关中路由转发请求的HystrixCommand执行超时时间
-            timeoutInMilliseconds: 5000
+#        url-patterns: /** # 拦截请求的地址。默认为 /*
+        enabled: true
+#      datasource.ds2.file:
+#        file: "classpath: gateway.json"
+#        ruleType: gw-flow
+#      datasource.ds1.file:
+#        file: "classpath: api.json"
+#        ruleType: gw-api-group
+      scg.fallback:
+        mode: response
+        response-status: 444
+        response-body: 1234
+      scg:
+        order: -100
+#
+management.endpoints.web.exposure.include: "*"
+##设置hystrix的熔断时间
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          thread:
+#            #设置API网关中路由转发请求的HystrixCommand执行超时时间
+#            timeoutInMilliseconds: 5000

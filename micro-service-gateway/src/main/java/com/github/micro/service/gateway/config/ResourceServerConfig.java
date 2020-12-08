@@ -38,6 +38,9 @@ public class ResourceServerConfig {
                 .pathMatchers("/swagger-ui/**").permitAll()
                 .pathMatchers("/swagger-resources/**").permitAll()
                 .pathMatchers("/v3/**").permitAll()
+                .pathMatchers("/api/**").permitAll()
+                .pathMatchers("/gateway/**").permitAll()
+                .pathMatchers("/flow/**").permitAll()
                 // 鉴权管理器配置
                 .anyExchange().access(new AuthorizationManager())
                 .and().exceptionHandling()
