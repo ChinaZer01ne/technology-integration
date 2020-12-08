@@ -36,6 +36,21 @@
         <artifactId>common-hystrix</artifactId>
         <version>${local.version}</version>
       </dependency>
+      <dependency>
+        <groupId>com.github</groupId>
+        <artifactId>common-sentinel</artifactId>
+        <version>${local.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github</groupId>
+        <artifactId>common-sync</artifactId>
+        <version>${local.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github</groupId>
+        <artifactId>common-upload</artifactId>
+        <version>${local.version}</version>
+      </dependency>
       <!-- json序列化-->
       <dependency>
         <groupId>com.fasterxml.jackson.datatype</groupId>

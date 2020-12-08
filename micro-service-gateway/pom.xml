@@ -66,12 +66,12 @@
 <!--		</dependency>-->
 		<!-- 熔断 sentinel -->
 		<dependency>
-			<groupId>com.github</groupId>
-			<artifactId>common-sentinel</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.alibaba.cloud</groupId>
 			<artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.github</groupId>
+			<artifactId>common-sentinel</artifactId>
 		</dependency>
 	</dependencies>
 
