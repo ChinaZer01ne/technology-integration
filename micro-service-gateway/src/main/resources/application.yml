@@ -52,12 +52,12 @@ spring:
 #      datasource.ds1.file:
 #        file: "classpath: api.json"
 #        ruleType: gw-api-group
-      scg.fallback:
-        mode: response
-        response-status: 444
-        response-body: 1234
-      scg:
-        order: -100
+#      scg.fallback:
+#        mode: response
+#        response-status: 444
+#        response-body: 1234
+#      scg:
+#        order: -100
 #
 management.endpoints.web.exposure.include: "*"
 ##设置hystrix的熔断时间
