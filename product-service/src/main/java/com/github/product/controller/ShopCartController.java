@@ -1,6 +1,6 @@
 package com.github.product.controller;
 
-import com.github.common.core.ServerResponse;
+import com.github.common.core.response.ServerResponse;
 import com.github.product.entity.input.CartRequest;
 import com.github.product.entity.vo.CartVO;
 import com.github.product.service.ShopCartService;

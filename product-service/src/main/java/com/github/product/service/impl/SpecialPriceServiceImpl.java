@@ -1,6 +1,6 @@
 package com.github.product.service.impl;
 
-import com.github.common.core.Pageable;
+import com.github.common.core.response.Pageable;
 import com.github.product.constants.ProductConstants;
 import com.github.product.entity.vo.SpecialPriceProductVO;
 import com.github.product.service.SpecialPriceService;
@@ -36,7 +36,7 @@ public class SpecialPriceServiceImpl implements SpecialPriceService {
      * 二级缓存解决缓存穿透的问题
      * @param pageNum : 当前页
      * @param pageSize ：页大小
-     * @return com.github.common.core.Pageable<com.github.product.entity.vo.SpecialPriceProductVO>
+     * @return com.github.common.core.response.Pageable<com.github.product.entity.vo.SpecialPriceProductVO>
      */
     private Pageable<SpecialPriceProductVO> secondLevelCacheListPage(Integer pageNum, Integer pageSize) {
         int start = (pageNum - 1) * pageSize;
@@ -70,7 +70,7 @@ public class SpecialPriceServiceImpl implements SpecialPriceService {
      * 存在缓存击穿问题
      * @param pageNum : 当前页
      * @param pageSize ：页大小
-     * @return com.github.common.core.Pageable<com.github.product.entity.vo.SpecialPriceProductVO>
+     * @return com.github.common.core.response.Pageable<com.github.product.entity.vo.SpecialPriceProductVO>
      */
     private Pageable<SpecialPriceProductVO> listPage(Integer pageNum, Integer pageSize) {
         int start = (pageNum - 1) * pageSize;

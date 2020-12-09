@@ -2,10 +2,7 @@ package com.github.sentinel.handler;
 
 import com.alibaba.csp.sentinel.adapter.spring.webflux.callback.BlockRequestHandler;
 import com.alibaba.fastjson.JSONObject;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
@@ -24,7 +21,7 @@ public class FluxBlockRequestHandler implements BlockRequestHandler {
         //log.error("sentinel 降级", t);
         System.out.println("sentinel 降级" + t);
         return ServerResponse.status(444).contentType(MediaType.APPLICATION_JSON)
-                .body(fromValue(JSONObject.toJSONString(com.github.common.core.ServerResponse.fail(t.getMessage()))));
+                .body(fromValue(JSONObject.toJSONString(com.github.common.core.response.ServerResponse.fail(t.getMessage()))));
     }
 
 }

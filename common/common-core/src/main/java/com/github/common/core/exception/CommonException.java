@@ -1,6 +1,6 @@
 package com.github.common.core.exception;
 
-import com.github.common.core.ServerResponseEnum;
+import com.github.common.core.response.ServerResponseEnum;
 import lombok.Data;
 
 /**

@@ -1,7 +1,7 @@
 package com.github.product.controller;
 
-import com.github.common.core.Pageable;
-import com.github.common.core.ServerResponse;
+import com.github.common.core.response.Pageable;
+import com.github.common.core.response.ServerResponse;
 import com.github.product.entity.vo.SpecialPriceProductVO;
 import com.github.product.service.SpecialPriceService;
 import io.swagger.annotations.ApiOperation;

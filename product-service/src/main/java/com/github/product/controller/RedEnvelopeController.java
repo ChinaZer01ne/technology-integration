@@ -1,6 +1,6 @@
 package com.github.product.controller;
 
-import com.github.common.core.ServerResponse;
+import com.github.common.core.response.ServerResponse;
 import com.github.product.service.RedEnvelopeService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

@@ -1,4 +1,4 @@
-package com.github.common.core;
+package com.github.common.core.response;
 
 import lombok.Data;
 
