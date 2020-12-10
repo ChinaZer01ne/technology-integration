@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author peach
  * @since 2020/12/9 16:18
  */
-@Slf4j
+//@Slf4j
 public class ServletBlockExceptionHandler implements BlockExceptionHandler {
 
     @Override
