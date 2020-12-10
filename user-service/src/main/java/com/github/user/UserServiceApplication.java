@@ -1,4 +1,4 @@
-package com.github;
+package com.github.user;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

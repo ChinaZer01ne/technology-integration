@@ -21,7 +21,7 @@ import reactor.core.publisher.Mono;
  * @since 2020/11/30 21:28
  */
 @Slf4j
-@Order(-1)
+@Order(-100)
 @Configuration
 public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
 

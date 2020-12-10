@@ -64,6 +64,10 @@
             <groupId>com.github</groupId>
             <artifactId>common-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github</groupId>
+            <artifactId>common-sentinel</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

@@ -14,13 +14,20 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class SentinelAutoConfiguration {
-
+    /**
+     * 针对webflux的自定义降级策略
+     * @return com.alibaba.csp.sentinel.adapter.spring.webflux.callback.BlockRequestHandler
+     */
     @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.REACTIVE)
     @Bean
     public BlockRequestHandler blockRequestHandler() {
         return new FluxBlockRequestHandler();
     }
 
+    /**
+     * 针对mvc的自定义降级策略
+     * @return com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.BlockExceptionHandler
+     */
     @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
     @Bean
     public BlockExceptionHandler blockExceptionHandler() {
