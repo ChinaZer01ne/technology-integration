@@ -55,6 +55,10 @@
 			<groupId>com.github</groupId>
 			<artifactId>internal-api</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.github</groupId>
+			<artifactId>common-tx</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
