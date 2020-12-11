@@ -1,4 +1,7 @@
 package com.github.order.state;
+
+import com.github.order.enums.OrderStateEnum;
+
 /**
  * 待发货状态
  * @author Zer01ne
@@ -8,5 +11,10 @@ public class UnSendState implements State {
     @Override
     public void doAction(Context context) {
         context.setState(new UnReceivedState());
+    }
+
+    @Override
+    public OrderStateEnum getState() {
+        return OrderStateEnum.UN_SEND;
     }
 }

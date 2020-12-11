@@ -51,6 +51,10 @@
 			<groupId>com.github</groupId>
 			<artifactId>common-sentinel</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.github</groupId>
+			<artifactId>internal-api</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

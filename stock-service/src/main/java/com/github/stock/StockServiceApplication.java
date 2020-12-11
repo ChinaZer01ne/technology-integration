@@ -1,4 +1,4 @@
-package com.github.stock.service;
+package com.github.stock;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

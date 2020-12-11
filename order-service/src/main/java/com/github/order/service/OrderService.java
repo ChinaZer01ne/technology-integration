@@ -1,5 +1,6 @@
 package com.github.order.service;
 
+import com.github.order.command.impl.OrderCreateCommand;
 import com.github.order.entity.Order;
 
 /**
@@ -10,13 +11,8 @@ public interface OrderService {
 
     /**
      * 创建订单
-     * @param order : 订单信息
+     * @param orderCreateCommand : 订单信息
      */
-    void create(Order order);
+    void create(OrderCreateCommand orderCreateCommand);
 
-    /**
-     * 订单支付完成，修改订单状态
-     * @param order : 订单信息
-     */
-    void paid(Order order);
 }

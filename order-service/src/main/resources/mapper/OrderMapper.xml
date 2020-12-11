@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.order.mapper.OrderMapper">
+
+    <resultMap id="BaseResultMap" type="com.github.order.entity.Order">
+        <!--@Table t_order_info-->
+        <result property="orderId" column="order_id" jdbcType="INTEGER"/>
+        <result property="orderCode" column="order_code" jdbcType="VARCHAR"/>
+        <result property="orderState" column="order_state" jdbcType="OTHER"/>
+        <result property="amount" column="amount" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="modifyTime" column="modify_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          order_id, order_code, order_state, amount, create_time, modify_time
+        from t_order_info
+        where order_id = #{orderId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          order_id, order_code, order_state, amount, create_time, modify_time
+        from t_order_info
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          order_id, order_code, order_state, amount, create_time, modify_time
+        from t_order_info
+        <where>
+            <if test="orderId != null">
+                and order_id = #{orderId}
+            </if>
+            <if test="orderCode != null and orderCode != ''">
+                and order_code = #{orderCode}
+            </if>
+            <if test="orderState != null">
+                and order_state = #{orderState}
+            </if>
+            <if test="amount != null">
+                and amount = #{amount}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="modifyTime != null">
+                and modify_time = #{modifyTime}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="orderId" useGeneratedKeys="true">
+        insert into t_order_info(order_code, order_state, amount, create_time, modify_time)
+        values (#{orderCode}, #{orderState}, #{amount}, #{createTime}, #{modifyTime})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update t_order_info
+        <set>
+            <if test="orderCode != null and orderCode != ''">
+                order_code = #{orderCode},
+            </if>
+            <if test="orderState != null">
+                order_state = #{orderState},
+            </if>
+            <if test="amount != null">
+                amount = #{amount},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime},
+            </if>
+        </set>
+        where order_id = #{orderId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from t_order_info where order_id = #{orderId}
+    </delete>
+
+</mapper>

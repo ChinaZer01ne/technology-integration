@@ -25,6 +25,7 @@ public class PayServiceImpl implements PayService {
 
     @Override
     public PayResultDTO pay(PayParamDTO payParam) {
+        // TODO 可否使用代理模式？
         // 调用第三方接口之前的处理
         // 。。。。
         TradeStrategy tradeStrategy = TradeStrategyFactory.generateStrategy(PaymentMethodEnum.get(payParam.getPaymentMethod()));
@@ -34,6 +35,7 @@ public class PayServiceImpl implements PayService {
         PayResult payResult = tradeStrategy.pay(param);
         // 调用第三方接口之后的处理
         // 。。。
+        // TODO 发消息通知订单，修改状态
         return new PayResultDTO();
     }
 

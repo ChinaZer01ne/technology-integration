@@ -6,6 +6,7 @@ package com.github.order.enums;
  * @since 2020/11/29 0:48
  */
 public enum  OrderStateEnum {
+    PRE(-100,"预创建"),
     UNPAID(100,"待付款"),
     UN_SEND(200,"待发货"),
     UN_RECEIVED(300,"待收货"),
