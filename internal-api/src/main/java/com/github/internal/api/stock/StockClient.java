@@ -3,7 +3,6 @@ package com.github.internal.api.stock;
 import com.github.internal.api.order.dto.OrderDTO;
 import com.github.internal.api.stock.fallback.StockClientFallback;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**

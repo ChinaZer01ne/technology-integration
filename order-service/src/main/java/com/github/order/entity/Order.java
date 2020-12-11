@@ -1,13 +1,9 @@
 package com.github.order.entity;
 
 import com.github.common.core.annotation.ddd.Domain;
-import com.github.order.enums.OrderStateEnum;
 import com.github.order.mapper.OrderDetailMapper;
 import com.github.order.mapper.OrderMapper;
-import com.github.order.state.Context;
 import com.github.order.state.PrepareState;
-import com.github.order.state.State;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 

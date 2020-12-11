@@ -2,7 +2,6 @@ package com.github.order.service.impl;
 
 import com.github.common.core.exception.Assert;
 import com.github.common.core.response.CommonServerResponseEnum;
-import com.github.common.core.response.ServerResponseEnum;
 import com.github.internal.api.order.dto.OrderDTO;
 import com.github.internal.api.pay.message.PayResultMessage;
 import com.github.internal.api.product.ProductClient;
