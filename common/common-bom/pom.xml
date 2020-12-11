@@ -51,6 +51,11 @@
         <artifactId>common-upload</artifactId>
         <version>${local.version}</version>
       </dependency>
+      <dependency>
+        <groupId>com.github</groupId>
+        <artifactId>common-tx</artifactId>
+        <version>${local.version}</version>
+      </dependency>
       <!-- json序列化-->
       <dependency>
         <groupId>com.fasterxml.jackson.datatype</groupId>

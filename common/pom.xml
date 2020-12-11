@@ -37,6 +37,7 @@
 		<module>common-upload</module>
         <module>common-sync</module>
         <module>common-sentinel</module>
+        <module>common-tx</module>
     </modules>
 
 </project>
