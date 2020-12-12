@@ -17,6 +17,7 @@
   <name>common-sentinel</name>
 
   <properties>
+    <java.version>11</java.version>
   </properties>
 
   <dependencies>
