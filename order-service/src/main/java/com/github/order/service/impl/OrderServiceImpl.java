@@ -73,6 +73,7 @@ public class OrderServiceImpl implements OrderService {
      * 订单支付完成，修改订单状态
      * @param payResultMessage : 支付结果
      */
+    @Override
     public void paid(PayResultMessage payResultMessage) {
         // TODO 分布式事务
 
@@ -84,10 +85,11 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderState(OrderStateEnum.UN_SEND.getCode());
         orderMapper.update(order);
 
-        // TODO 扣库存（同步或者异步）
-        OrderDTO orderDTO = new OrderDTO();
-        BeanUtils.copyProperties(order, orderDTO);
-        stockClient.deduct(orderDTO);
+    }
+
+    @Override
+    public Order getById(Long orderId) {
+        return orderMapper.queryById(orderId);
     }
 
 

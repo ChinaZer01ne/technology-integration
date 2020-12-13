@@ -12,7 +12,9 @@ import com.github.pay.handler.entity.RefundParam;
 import com.github.pay.handler.entity.RefundResult;
 import com.github.pay.handler.factory.TradeStrategyFactory;
 import com.github.pay.service.PayService;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -22,6 +24,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class PayServiceImpl implements PayService {
 
+
+    @Autowired
+    private RocketMQTemplate rocketMQTemplate;
 
     @Override
     public PayResultDTO pay(PayParamDTO payParam) {
@@ -36,6 +41,7 @@ public class PayServiceImpl implements PayService {
         // 调用第三方接口之后的处理
         // 。。。
         // TODO 发消息通知订单，修改状态
+        rocketMQTemplate.sendMessageInTransaction("OrderPaid", null, payResult);
         return new PayResultDTO();
     }
 

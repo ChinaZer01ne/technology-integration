@@ -5,6 +5,7 @@ import com.github.order.mapper.OrderDetailMapper;
 import com.github.order.mapper.OrderMapper;
 import com.github.order.state.PrepareState;
 import lombok.Data;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
@@ -25,6 +26,8 @@ public class Order {
     private OrderMapper orderMapper;
     @Autowired
     private OrderDetailMapper orderDetailMapper;
+    @Autowired
+    private RocketMQTemplate rocketMQTemplate;
 
     /**
      * 订单id
@@ -63,6 +66,11 @@ public class Order {
         PrepareState state = new PrepareState();
         //state.doAction(this);
         orderState = state.create().getState().getCode();
+        rocketMQTemplate.sendMessageInTransaction("orderCreate", null, this);
+        return true;
+    }
+
+    public boolean save() {
         return orderMapper.insert(this) > 0;
     }
 }

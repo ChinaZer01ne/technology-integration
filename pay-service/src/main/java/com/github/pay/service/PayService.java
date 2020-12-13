@@ -1,5 +1,6 @@
 package com.github.pay.service;
 
+import com.github.pay.entity.PayLog;
 import com.github.pay.entity.dto.PayParamDTO;
 import com.github.pay.entity.dto.PayResultDTO;
 import com.github.pay.entity.dto.RefundParamDTO;
@@ -24,4 +25,5 @@ public interface PayService {
      * @return com.github.pay.entity.dto.RefundResultDTO
      */
     RefundResultDTO refund(RefundParamDTO refundParamDTO);
+
 }
