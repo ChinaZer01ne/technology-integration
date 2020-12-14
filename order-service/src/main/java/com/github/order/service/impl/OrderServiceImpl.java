@@ -19,6 +19,7 @@ import com.github.order.state.UnPaidState;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -51,11 +52,13 @@ public class OrderServiceImpl implements OrderService {
 
         List<Long> productIds = orderCreateCommand.getCartWareList().stream().map(CartWareVO::getProductId).collect(Collectors.toList());
         List<ProductDTO> products = productClient.get(productIds);
-        Map<Long, ProductDTO> productMap = products.stream().collect(Collectors.toMap(ProductDTO::getId, product -> product));
-        for (OrderDetail orderDetail : order.getOrderDetailList()) {
-            ProductDTO product = productMap.get(orderDetail.getProductId());
-            orderDetail.setProductName(product.getProductName());
-            orderDetail.setProductPrice(product.getProductPrice());
+        if (!CollectionUtils.isEmpty(products)) {
+            Map<Long, ProductDTO> productMap = products.stream().collect(Collectors.toMap(ProductDTO::getId, product -> product));
+            for (OrderDetail orderDetail : order.getOrderDetailList()) {
+                ProductDTO product = productMap.get(orderDetail.getProductId());
+                orderDetail.setProductName(product.getProductName());
+                orderDetail.setProductPrice(product.getProductPrice());
+            }
         }
 
         // TODO 分布式事务

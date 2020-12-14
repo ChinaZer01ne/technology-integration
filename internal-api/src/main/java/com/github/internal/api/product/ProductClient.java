@@ -27,6 +27,6 @@ public interface ProductClient {
      * @param ids : 商品id集合
      * @return com.github.internal.api.product.ProductDTO
      */
-    @GetMapping("/internal/product/get")
+    @GetMapping("/internal/product/getByIds")
     List<ProductDTO> get(@RequestParam("ids") List<Long> ids);
 }

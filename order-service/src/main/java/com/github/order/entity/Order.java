@@ -7,6 +7,8 @@ import com.github.order.state.PrepareState;
 import lombok.Data;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,6 +20,7 @@ import java.util.List;
  */
 @Data
 @Domain
+@Scope("prototype")
 public class Order {
 
     private static final long serialVersionUID = -81667317296658573L;
@@ -66,7 +69,7 @@ public class Order {
         PrepareState state = new PrepareState();
         //state.doAction(this);
         orderState = state.create().getState().getCode();
-        rocketMQTemplate.sendMessageInTransaction("orderCreate", null, this);
+        rocketMQTemplate.sendMessageInTransaction("orderCreated", null, this);
         return true;
     }
 

@@ -3,8 +3,7 @@ package com.github.order.controller;
 import com.github.order.command.impl.OrderCreateCommand;
 import com.github.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 写订单接口
@@ -22,8 +21,8 @@ public class OrderCommandController {
      * 创建订单
      * @return java.lang.String
      */
-    @RequestMapping("/create")
-    public String create(OrderCreateCommand orderCreateCommand){
+    @PostMapping("/create")
+    public String create(@RequestBody OrderCreateCommand orderCreateCommand){
         orderService.create(orderCreateCommand);
         return "ok";
     }
