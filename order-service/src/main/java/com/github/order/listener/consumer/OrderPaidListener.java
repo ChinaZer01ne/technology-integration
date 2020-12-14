@@ -1,5 +1,6 @@
 package com.github.order.listener.consumer;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.internal.api.order.dto.OrderDTO;
 import com.github.internal.api.pay.message.PayResultMessage;
 import com.github.order.entity.Order;
@@ -9,6 +10,8 @@ import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 
 /**
  * @author Zer01ne
@@ -33,7 +36,8 @@ public class OrderPaidListener implements RocketMQListener {
         // TODO 扣库存（同步或者异步）
         OrderDTO orderDTO = new OrderDTO();
         BeanUtils.copyProperties(order, orderDTO);
-        rocketMQTemplate.sendMessageInTransaction("OrderPaidSuccess",null,orderDTO);
-        rocketMQTemplate.sendMessageInTransaction("OrderPaidFailure",null,orderDTO);
+        Message<String> msg = MessageBuilder.withPayload(JSONObject.toJSONString(orderDTO)).build();
+        rocketMQTemplate.sendMessageInTransaction("OrderPaidSuccess",msg, null);
+        rocketMQTemplate.sendMessageInTransaction("OrderPaidFailure",msg, null);
     }
 }

@@ -1,6 +1,8 @@
 package com.github.order.entity;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.common.core.annotation.ddd.Domain;
+import com.github.order.SpringContextUtil;
 import com.github.order.mapper.OrderDetailMapper;
 import com.github.order.mapper.OrderMapper;
 import com.github.order.state.PrepareState;
@@ -8,6 +10,8 @@ import lombok.Data;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -25,12 +29,9 @@ public class Order {
 
     private static final long serialVersionUID = -81667317296658573L;
 
-    @Autowired
-    private OrderMapper orderMapper;
-    @Autowired
-    private OrderDetailMapper orderDetailMapper;
-    @Autowired
-    private RocketMQTemplate rocketMQTemplate;
+    private transient OrderMapper orderMapper = (OrderMapper) SpringContextUtil.getBean(OrderMapper.class);
+    private transient OrderDetailMapper orderDetailMapper = (OrderDetailMapper) SpringContextUtil.getBean(OrderDetailMapper.class);;
+    private transient RocketMQTemplate rocketMQTemplate = (RocketMQTemplate) SpringContextUtil.getBean(RocketMQTemplate.class);;
 
     /**
      * 订单id
@@ -69,7 +70,8 @@ public class Order {
         PrepareState state = new PrepareState();
         //state.doAction(this);
         orderState = state.create().getState().getCode();
-        rocketMQTemplate.sendMessageInTransaction("orderCreated", null, this);
+        Message<String> msg = MessageBuilder.withPayload(JSONObject.toJSONString(this)).build();
+        rocketMQTemplate.sendMessageInTransaction("OrderCreated", msg, null);
         return true;
     }
 

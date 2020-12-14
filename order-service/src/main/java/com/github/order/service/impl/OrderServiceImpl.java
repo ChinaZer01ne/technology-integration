@@ -66,9 +66,9 @@ public class OrderServiceImpl implements OrderService {
         order.create();
 
         // 锁定库存（同步or异步）
-        OrderDTO orderDTO = new OrderDTO();
-        BeanUtils.copyProperties(order, orderDTO);
-        stockClient.lock(orderDTO);
+        //OrderDTO orderDTO = new OrderDTO();
+        //BeanUtils.copyProperties(order, orderDTO);
+        //stockClient.lock(orderDTO);
 
     }
 

@@ -1,5 +1,6 @@
 package com.github.pay.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.pay.entity.dto.PayParamDTO;
 import com.github.pay.entity.dto.PayResultDTO;
 import com.github.pay.entity.dto.RefundParamDTO;
@@ -15,6 +16,8 @@ import com.github.pay.service.PayService;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -41,7 +44,8 @@ public class PayServiceImpl implements PayService {
         // 调用第三方接口之后的处理
         // 。。。
         // TODO 发消息通知订单，修改状态
-        rocketMQTemplate.sendMessageInTransaction("OrderPaid", null, payResult);
+        Message<String> msg = MessageBuilder.withPayload(JSONObject.toJSONString(payResult)).build();
+        rocketMQTemplate.sendMessageInTransaction("OrderPaid", msg,null);
         return new PayResultDTO();
     }
 
