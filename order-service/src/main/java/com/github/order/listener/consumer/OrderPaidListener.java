@@ -17,7 +17,7 @@ import org.springframework.messaging.support.MessageBuilder;
  * @author Zer01ne
  * @since 2020/12/13 15:46
  */
-@RocketMQMessageListener(consumerGroup = "order-service", topic = "OrderPaid")
+@RocketMQMessageListener(consumerGroup = "order-paid-consumer", topic = "OrderPaid")
 public class OrderPaidListener implements RocketMQListener {
 
     @Autowired

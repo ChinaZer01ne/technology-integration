@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-@RocketMQMessageListener(consumerGroup = "stock-consumer", topic = "OrderCreated")
+@RocketMQMessageListener(consumerGroup = "stock-lock-consumer", topic = "OrderCreated")
 public class StockLockListener implements RocketMQListener<OrderDTO> {
 
     @Autowired

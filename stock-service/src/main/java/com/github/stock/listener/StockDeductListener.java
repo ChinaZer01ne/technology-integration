@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
  * @since 2020/12/13 16:38
  */
 @Slf4j
-//@Component
-@RocketMQMessageListener(consumerGroup = "stock-consumer", topic = "OrderPaidSuccess")
+@Component
+@RocketMQMessageListener(consumerGroup = "stock-deduct-consumer", topic = "OrderPaidSuccess")
 public class StockDeductListener implements RocketMQListener<OrderDTO> {
 
     @Autowired

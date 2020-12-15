@@ -7,6 +7,9 @@ import com.github.order.mapper.OrderDetailMapper;
 import com.github.order.mapper.OrderMapper;
 import com.github.order.state.PrepareState;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.rocketmq.client.producer.LocalTransactionState;
+import org.apache.rocketmq.client.producer.TransactionSendResult;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -16,12 +19,14 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 订单领域对象
  * @author Zer01ne
  * @since 2020/11/29 1:25
  */
+@Slf4j
 @Data
 @Domain
 @Scope("prototype")
@@ -71,11 +76,20 @@ public class Order {
         //state.doAction(this);
         orderState = state.create().getState().getCode();
         Message<String> msg = MessageBuilder.withPayload(JSONObject.toJSONString(this)).build();
-        rocketMQTemplate.sendMessageInTransaction("OrderCreated", msg, null);
-        return true;
+        TransactionSendResult sendResult = rocketMQTemplate.sendMessageInTransaction("OrderCreated", msg, null);
+        if (Objects.equals(sendResult.getLocalTransactionState(), LocalTransactionState.COMMIT_MESSAGE)) {
+            return true;
+        }
+        return false;
     }
 
+    /**
+     * 保存订单信息
+     * @return boolean
+     */
     public boolean save() {
-        return orderMapper.insert(this) > 0;
+        log.info("保存订单信息");
+        //return orderMapper.insert(this) > 0;
+        return true;
     }
 }
