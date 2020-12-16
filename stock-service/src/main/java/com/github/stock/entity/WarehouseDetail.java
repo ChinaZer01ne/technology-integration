@@ -1,7 +1,7 @@
 package com.github.stock.entity;
 
-import java.util.Date;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * (TWarehouseDetail)实体类

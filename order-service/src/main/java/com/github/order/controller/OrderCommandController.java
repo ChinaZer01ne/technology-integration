@@ -2,10 +2,12 @@ package com.github.order.controller;
 
 import com.github.common.core.response.ServerResponse;
 import com.github.order.command.impl.OrderCreateCommand;
-import com.github.order.entity.Order;
 import com.github.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 写订单接口

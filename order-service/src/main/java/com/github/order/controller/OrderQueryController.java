@@ -1,7 +1,6 @@
 package com.github.order.controller;
 
 import com.github.common.core.response.ServerResponse;
-import com.github.internal.api.order.dto.OrderDTO;
 import com.github.order.entity.Order;
 import com.github.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;

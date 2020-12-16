@@ -1,6 +1,7 @@
 package com.github.stock.service;
 
 import com.github.stock.entity.Warehouse;
+
 import java.util.List;
 
 /**

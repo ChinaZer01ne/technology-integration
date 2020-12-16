@@ -1,14 +1,12 @@
 package com.github.stock.service.impl;
 
 import com.github.internal.api.order.dto.OrderDTO;
-import com.github.internal.api.order.dto.OrderDetailDTO;
 import com.github.stock.entity.Stock;
 import com.github.stock.mapper.StockMapper;
 import com.github.stock.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**

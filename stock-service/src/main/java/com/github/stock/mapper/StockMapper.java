@@ -1,6 +1,5 @@
 package com.github.stock.mapper;
 
-import com.github.internal.api.order.dto.OrderDTO;
 import com.github.internal.api.order.dto.OrderDetailDTO;
 import com.github.stock.entity.Stock;
 import org.apache.ibatis.annotations.Param;

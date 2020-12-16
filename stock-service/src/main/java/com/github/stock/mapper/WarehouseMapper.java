@@ -2,6 +2,7 @@ package com.github.stock.mapper;
 
 import com.github.stock.entity.Warehouse;
 import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**

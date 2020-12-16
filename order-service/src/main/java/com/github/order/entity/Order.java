@@ -3,6 +3,7 @@ package com.github.order.entity;
 import com.alibaba.fastjson.JSONObject;
 import com.github.common.core.annotation.ddd.Domain;
 import com.github.common.core.utils.SpringContextUtil;
+import com.github.order.enums.OrderStateEnum;
 import com.github.order.mapper.OrderDetailMapper;
 import com.github.order.mapper.OrderMapper;
 import com.github.order.state.PrepareState;
@@ -88,6 +89,17 @@ public class Order {
     public boolean save() {
         log.info("保存订单信息");
         //return orderMapper.insert(this) > 0;
+        return true;
+    }
+
+    /**
+     * 修改订单状态
+     * @return boolean
+     */
+    public boolean paid() {
+        log.info("修改订单状态");
+        this.setOrderState(OrderStateEnum.UN_SEND.getCode());
+        //return orderMapper.update(this) > 0;
         return true;
     }
 }

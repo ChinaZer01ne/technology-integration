@@ -1,6 +1,5 @@
 package com.github.pay.service;
 
-import com.github.pay.entity.PayLog;
 import com.github.pay.entity.dto.PayParamDTO;
 import com.github.pay.entity.dto.PayResultDTO;
 import com.github.pay.entity.dto.RefundParamDTO;
