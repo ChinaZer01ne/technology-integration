@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.stock.mapper.WarehouseMapper">
+
+    <resultMap id="BaseResultMap" type="com.github.stock.entity.Warehouse">
+        <!--@Table t_warehouse-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="storeId" column="store_id" jdbcType="INTEGER"/>
+        <result property="storeType" column="store_type" jdbcType="OTHER"/>
+        <result property="state" column="state" jdbcType="OTHER"/>
+        <result property="createUser" column="create_user" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="modifyTime" column="modify_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, store_id, store_type, state, create_user, create_time, modify_time
+        from ti.t_warehouse
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, store_id, store_type, state, create_user, create_time, modify_time
+        from ti.t_warehouse
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, store_id, store_type, state, create_user, create_time, modify_time
+        from ti.t_warehouse
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="storeId != null">
+                and store_id = #{storeId}
+            </if>
+            <if test="storeType != null">
+                and store_type = #{storeType}
+            </if>
+            <if test="state != null">
+                and state = #{state}
+            </if>
+            <if test="createUser != null">
+                and create_user = #{createUser}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="modifyTime != null">
+                and modify_time = #{modifyTime}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into ti.t_warehouse(store_id, store_type, state, create_user, create_time, modify_time)
+        values (#{storeId}, #{storeType}, #{state}, #{createUser}, #{createTime}, #{modifyTime})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update ti.t_warehouse
+        <set>
+            <if test="storeId != null">
+                store_id = #{storeId},
+            </if>
+            <if test="storeType != null">
+                store_type = #{storeType},
+            </if>
+            <if test="state != null">
+                state = #{state},
+            </if>
+            <if test="createUser != null">
+                create_user = #{createUser},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from ti.t_warehouse where id = #{id}
+    </delete>
+
+</mapper>

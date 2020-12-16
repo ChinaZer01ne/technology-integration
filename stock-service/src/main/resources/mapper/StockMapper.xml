@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.stock.mapper.StockMapper">
+
+    <resultMap id="BaseResultMap" type="com.github.stock.entity.Stock">
+        <!--@Table t_stock-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="storeId" column="store_id" jdbcType="INTEGER"/>
+        <result property="productId" column="product_id" jdbcType="INTEGER"/>
+        <result property="actualNum" column="actual_num" jdbcType="INTEGER"/>
+        <result property="lockNum" column="lock_num" jdbcType="INTEGER"/>
+        <result property="orderLockNum" column="order_lock_num" jdbcType="INTEGER"/>
+        <result property="preSellNum" column="pre_sell_num" jdbcType="INTEGER"/>
+        <result property="preSellState" column="pre_sell_state" jdbcType="INTEGER"/>
+        <result property="stockState" column="stock_state" jdbcType="OTHER"/>
+        <result property="status" column="status" jdbcType="OTHER"/>
+        <result property="createUser" column="create_user" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="modifyTime" column="modify_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, store_id, product_id, actual_num, lock_num, order_lock_num, pre_sell_num, pre_sell_state, stock_state, status, create_user, create_time, modify_time
+        from t_stock
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, store_id, product_id, actual_num, lock_num, order_lock_num, pre_sell_num, pre_sell_state, stock_state, status, create_user, create_time, modify_time
+        from t_stock
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, store_id, product_id, actual_num, lock_num, order_lock_num, pre_sell_num, pre_sell_state, stock_state, status, create_user, create_time, modify_time
+        from t_stock
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="storeId != null">
+                and store_id = #{storeId}
+            </if>
+            <if test="productId != null">
+                and product_id = #{productId}
+            </if>
+            <if test="actualNum != null">
+                and actual_num = #{actualNum}
+            </if>
+            <if test="lockNum != null">
+                and lock_num = #{lockNum}
+            </if>
+            <if test="orderLockNum != null">
+                and order_lock_num = #{orderLockNum}
+            </if>
+            <if test="preSellNum != null">
+                and pre_sell_num = #{preSellNum}
+            </if>
+            <if test="preSellState != null">
+                and pre_sell_state = #{preSellState}
+            </if>
+            <if test="stockState != null">
+                and stock_state = #{stockState}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="createUser != null">
+                and create_user = #{createUser}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="modifyTime != null">
+                and modify_time = #{modifyTime}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into t_stock(store_id, product_id, actual_num, lock_num, order_lock_num, pre_sell_num, pre_sell_state, stock_state, status, create_user, create_time, modify_time)
+        values (#{storeId}, #{productId}, #{actualNum}, #{lockNum}, #{orderLockNum}, #{preSellNum}, #{preSellState}, #{stockState}, #{status}, #{createUser}, #{createTime}, #{modifyTime})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update t_stock
+        <set>
+            <if test="storeId != null">
+                store_id = #{storeId},
+            </if>
+            <if test="productId != null">
+                product_id = #{productId},
+            </if>
+            <if test="actualNum != null">
+                actual_num = #{actualNum},
+            </if>
+            <if test="lockNum != null">
+                lock_num = #{lockNum},
+            </if>
+            <if test="orderLockNum != null">
+                order_lock_num = #{orderLockNum},
+            </if>
+            <if test="preSellNum != null">
+                pre_sell_num = #{preSellNum},
+            </if>
+            <if test="preSellState != null">
+                pre_sell_state = #{preSellState},
+            </if>
+            <if test="stockState != null">
+                stock_state = #{stockState},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="createUser != null">
+                create_user = #{createUser},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="lock">
+        <foreach collection="list" item="item">
+            update t_stock set order_lock_num = order_lock_num + #{item.productNum} where product_id = #{item.productId}
+        </foreach>
+    </update>
+
+    <update id="deduct">
+        <foreach collection="list" item="item">
+            update t_stock set lock_num = lock_num + #{item.lockNum} where product_id = #{item.productId}
+        </foreach>
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from t_stock where id = #{id}
+    </delete>
+
+</mapper>
