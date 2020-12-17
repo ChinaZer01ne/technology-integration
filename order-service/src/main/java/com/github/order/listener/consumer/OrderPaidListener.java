@@ -2,6 +2,7 @@ package com.github.order.listener.consumer;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.internal.api.order.dto.OrderDTO;
+import com.github.internal.api.pay.enums.PayStateEnum;
 import com.github.internal.api.pay.message.PayResultMessage;
 import com.github.order.entity.Order;
 import com.github.order.service.OrderService;
@@ -31,15 +32,15 @@ public class OrderPaidListener implements RocketMQListener<PayResultMessage> {
 
     @Override
     public void onMessage(PayResultMessage message) {
-        PayResultMessage payResultMessage = message;
+        // TODO 下游消费者要有幂等处理，幂等处理可以用幂等表，需要与业务操作在同一事务
         log.info("订单已支付：{}", message);
-        orderService.paid(payResultMessage);
+        orderService.paid(message);
 
-        Order order = orderService.getById(payResultMessage.getOrderId());
+        Order order = orderService.getById(message.getOrderId());
         OrderDTO orderDTO = new OrderDTO();
         BeanUtils.copyProperties(order, orderDTO);
         Message<String> msg = MessageBuilder.withPayload(JSONObject.toJSONString(orderDTO)).build();
-        if (Objects.equals(message.getPayState(), 1)) {
+        if (Objects.equals(message.getPayState(), PayStateEnum.SUCCESS.getCode())) {
             rocketMQTemplate.sendMessageInTransaction("OrderPaidSuccess",msg, null);
         }else{
             rocketMQTemplate.sendMessageInTransaction("OrderPaidFailure",msg, null);

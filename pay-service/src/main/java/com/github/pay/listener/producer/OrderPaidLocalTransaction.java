@@ -40,6 +40,8 @@ public class OrderPaidLocalTransaction implements RocketMQLocalTransactionListen
 
     @Override
     public RocketMQLocalTransactionState checkLocalTransaction(Message msg) {
+        // TODO 可以单独用日志表记录事务执行状态，单独check日志表
+
         PayResult payResult = JSONObject.parseObject(new String((byte[]) msg.getPayload()),PayResult.class);
         try {
             PayLog payLog = payLogService.getByPayId(payResult.getPayId());

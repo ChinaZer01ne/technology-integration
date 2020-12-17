@@ -35,6 +35,8 @@ public class OrderCreateLocalTransaction implements RocketMQLocalTransactionList
 
     @Override
     public RocketMQLocalTransactionState checkLocalTransaction(Message msg) {
+        // TODO 可以单独用日志表记录事务执行状态，单独check日志表
+
         Order order = JSONObject.parseObject(new String((byte[]) msg.getPayload()),Order.class);
         try {
             Order dbOrder = orderService.getById(order.getOrderId());

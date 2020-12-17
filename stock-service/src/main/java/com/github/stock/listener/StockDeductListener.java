@@ -21,6 +21,8 @@ public class StockDeductListener implements RocketMQListener<OrderDTO> {
     private StockService stockService;
     @Override
     public void onMessage(OrderDTO order) {
+        // TODO 下游消费者要有幂等处理，幂等处理可以用幂等表，需要与业务操作在同一事务
+
         stockService.deduct(order);
     }
 }
