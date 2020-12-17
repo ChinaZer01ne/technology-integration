@@ -42,8 +42,6 @@ public class OrderPaidListener implements RocketMQListener<PayResultMessage> {
         Message<String> msg = MessageBuilder.withPayload(JSONObject.toJSONString(orderDTO)).build();
         if (Objects.equals(message.getPayState(), PayStateEnum.SUCCESS.getCode())) {
             rocketMQTemplate.sendMessageInTransaction("OrderPaidSuccess",msg, null);
-        }else{
-            rocketMQTemplate.sendMessageInTransaction("OrderPaidFailure",msg, null);
         }
     }
 }
