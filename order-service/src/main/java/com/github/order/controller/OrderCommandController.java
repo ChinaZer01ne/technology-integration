@@ -1,9 +1,13 @@
 package com.github.order.controller;
 
+import com.github.common.core.response.ServerResponse;
 import com.github.order.command.impl.OrderCreateCommand;
 import com.github.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 写订单接口
@@ -22,8 +26,8 @@ public class OrderCommandController {
      * @return java.lang.String
      */
     @PostMapping("/create")
-    public String create(@RequestBody OrderCreateCommand orderCreateCommand){
+    public ServerResponse<Void> create(@RequestBody OrderCreateCommand orderCreateCommand){
         orderService.create(orderCreateCommand);
-        return "ok";
+        return ServerResponse.success();
     }
 }

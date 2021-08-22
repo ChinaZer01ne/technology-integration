@@ -30,6 +30,10 @@ public class ServerResponse<T> {
         return serverResponse;
     }
 
+    public static <T> ServerResponse<T> success() {
+        return success(CommonServerResponseEnum.SUCCESS.getCode(), CommonServerResponseEnum.SUCCESS.getMessage(), null);
+    }
+
     public static <T> ServerResponse<T> success(T data) {
         return success(CommonServerResponseEnum.SUCCESS.getCode(), CommonServerResponseEnum.SUCCESS.getMessage(), data);
     }

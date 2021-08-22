@@ -1,5 +1,7 @@
 package com.github.internal.api.order.dto;
 
+import lombok.Data;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -7,6 +9,7 @@ import java.util.List;
  * @author peach
  * @since 2020/12/11 14:28
  */
+@Data
 public class OrderDTO {
     /**
      * 订单id
@@ -33,7 +36,7 @@ public class OrderDTO {
      */
     private LocalDateTime modifyTime;
     /**
-     * 最终修改时间
+     * 订单详情
      */
     private List<OrderDetailDTO> orderDetailList;
 }

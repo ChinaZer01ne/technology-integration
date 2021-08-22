@@ -2,7 +2,6 @@ package com.github.order.service.impl;
 
 import com.github.common.core.exception.Assert;
 import com.github.common.core.response.CommonServerResponseEnum;
-import com.github.internal.api.order.dto.OrderDTO;
 import com.github.internal.api.pay.message.PayResultMessage;
 import com.github.internal.api.product.ProductClient;
 import com.github.internal.api.product.ProductDTO;
@@ -16,7 +15,6 @@ import com.github.order.mapper.OrderMapper;
 import com.github.order.service.OrderService;
 import com.github.order.state.Context;
 import com.github.order.state.UnPaidState;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;

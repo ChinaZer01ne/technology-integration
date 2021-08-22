@@ -7,7 +7,6 @@
 		<artifactId>technology-integration</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>com.github</groupId>
 	<artifactId>order-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>order-service</name>
@@ -15,7 +14,6 @@
 
 	<properties>
 		<java.version>11</java.version>
-		<spring-cloud.version>2020.0.0-M5</spring-cloud.version>
 	</properties>
 
 	<dependencies>
@@ -74,6 +72,10 @@
 		<dependency>
 			<groupId>com.github</groupId>
 			<artifactId>common-tx</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.github</groupId>
+			<artifactId>common-core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.rocketmq</groupId>

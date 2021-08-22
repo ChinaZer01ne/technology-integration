@@ -1,22 +1,16 @@
-package com.github.pay.service;
+package com.github.stock.service;
 
-import com.github.pay.entity.PayLog;
+import com.github.stock.entity.WarehouseDetail;
 
 import java.util.List;
 
 /**
- * @author Zer01ne
- * @since 2020/11/28 23:55
+ * (TWarehouseDetail)表服务接口
+ *
+ * @author makejava
+ * @since 2020-12-16 14:15:56
  */
-public interface PayLogService {
-
-
-    /**
-     * 查询支付记录
-     * @param payId : 支付id
-     * @return com.github.pay.entity.PayLog
-     */
-    PayLog getByPayId(Long payId);
+public interface WarehouseDetailService {
 
     /**
      * 通过ID查询单条数据
@@ -24,7 +18,7 @@ public interface PayLogService {
      * @param id 主键
      * @return 实例对象
      */
-    PayLog queryById(Long id);
+    WarehouseDetail queryById(Long id);
 
     /**
      * 查询多条数据
@@ -33,23 +27,23 @@ public interface PayLogService {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<PayLog> queryAllByLimit(int offset, int limit);
+    List<WarehouseDetail> queryAllByLimit(int offset, int limit);
 
     /**
      * 新增数据
      *
-     * @param PayLog 实例对象
+     * @param warehouseDetail 实例对象
      * @return 实例对象
      */
-    PayLog insert(PayLog PayLog);
+    WarehouseDetail insert(WarehouseDetail warehouseDetail);
 
     /**
      * 修改数据
      *
-     * @param PayLog 实例对象
+     * @param warehouseDetail 实例对象
      * @return 实例对象
      */
-    PayLog update(PayLog PayLog);
+    WarehouseDetail update(WarehouseDetail warehouseDetail);
 
     /**
      * 通过主键删除数据
