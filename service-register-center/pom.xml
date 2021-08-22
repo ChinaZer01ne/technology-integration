@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.github</groupId>
-        <artifactId>technology-integration</artifactId>
+        <artifactId>base-bom</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>service-register-center</artifactId>

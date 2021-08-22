@@ -18,6 +18,7 @@ import com.github.order.state.Context;
 import com.github.order.state.UnPaidState;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 

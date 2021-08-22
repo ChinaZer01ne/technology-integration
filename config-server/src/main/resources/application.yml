@@ -1,0 +1,14 @@
+server:
+  port: 18090
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/Zer01ne/dapper-tool.git
+          username:
+          password:
+          default-label: master
