@@ -7,16 +7,7 @@ import lombok.Data;
  * @since 2020/11/18 10:42
  */
 @Data
-public class ServerResponse<T> {
-
-    /**
-     * 响应码
-     */
-    private Integer code;
-    /**
-     * 响应消息
-     */
-    private String message;
+public class ServerResponse<T> extends BaseResponse<T> {
     /**
      * 返回数据
      */

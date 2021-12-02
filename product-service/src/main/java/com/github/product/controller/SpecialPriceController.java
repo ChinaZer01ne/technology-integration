@@ -1,6 +1,6 @@
 package com.github.product.controller;
 
-import com.github.common.core.response.Pageable;
+import com.github.common.core.response.PageResult;
 import com.github.common.core.response.ServerResponse;
 import com.github.product.entity.vo.SpecialPriceProductVO;
 import com.github.product.service.SpecialPriceService;
@@ -25,8 +25,8 @@ public class SpecialPriceController {
 
     @ApiOperation("获取特价商品列表")
     @RequestMapping("/list")
-    public ServerResponse<Pageable<SpecialPriceProductVO>> list(@ApiParam("当前页") @RequestParam("pageNum") Integer pageNum,
-                                                                @ApiParam("页大小") @RequestParam("pageSize") Integer pageSize) {
+    public ServerResponse<PageResult<SpecialPriceProductVO>> list(@ApiParam("当前页") @RequestParam("pageNum") Integer pageNum,
+                                                                  @ApiParam("页大小") @RequestParam("pageSize") Integer pageSize) {
 
         return ServerResponse.success(specialPriceService.list(pageNum, pageSize));
     }

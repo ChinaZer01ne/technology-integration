@@ -1,6 +1,6 @@
 package com.github.product.service;
 
-import com.github.common.core.response.Pageable;
+import com.github.common.core.response.PageResult;
 import com.github.product.entity.vo.SpecialPriceProductVO;
 
 /**
@@ -15,5 +15,5 @@ public interface SpecialPriceService {
      * @param pageSize ：页大小
      * @return com.github.common.core.response.Pageable<com.github.product.entity.vo.SpecialPriceProductVO>
      */
-    Pageable<SpecialPriceProductVO> list(Integer pageNum, Integer pageSize);
+    PageResult<SpecialPriceProductVO> list(Integer pageNum, Integer pageSize);
 }

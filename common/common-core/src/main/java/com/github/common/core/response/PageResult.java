@@ -10,7 +10,7 @@ import java.util.List;
  * @since 2020/11/18 15:47
  */
 @Data
-public class Pageable<T> {
+public class PageResult<T> extends BaseResponse<T> {
 
     /**
      * 页码
@@ -24,18 +24,17 @@ public class Pageable<T> {
      * 总记录
      */
     private Long totalCount;
-
     /**
      * 数据
      */
     private List<T> data;
 
-    public static <T> Pageable<T> warp(List<T> data, Integer pageNum, Integer pageSize, Long size){
-        Pageable<T> pageable = new Pageable<>();
-        pageable.setData(data);
-        pageable.setPageNum(pageNum);
-        pageable.setPageSize(pageSize);
-        pageable.setTotalCount(size);
-        return pageable;
+    public static <T> PageResult<T> warp(List<T> data, Integer pageNum, Integer pageSize, Long size){
+        PageResult<T> pageResult = new PageResult<>();
+        pageResult.setData(data);
+        pageResult.setPageNum(pageNum);
+        pageResult.setPageSize(pageSize);
+        pageResult.setTotalCount(size);
+        return pageResult;
     }
 }

@@ -1,6 +1,6 @@
 package com.github.product.service.impl;
 
-import com.github.common.core.response.Pageable;
+import com.github.common.core.response.PageResult;
 import com.github.product.constants.ProductConstants;
 import com.github.product.entity.vo.SpecialPriceProductVO;
 import com.github.product.service.SpecialPriceService;
@@ -27,7 +27,7 @@ public class SpecialPriceServiceImpl implements SpecialPriceService {
      * 这种特价商品场景一般并发量比较大，其中的商品数据一般是预加载到redis中，请求主要是redis来处理。
      */
     @Override
-    public Pageable<SpecialPriceProductVO> list(Integer pageNum, Integer pageSize) {
+    public PageResult<SpecialPriceProductVO> list(Integer pageNum, Integer pageSize) {
         //return listPage(pageNum, pageSize);
         return secondLevelCacheListPage(pageNum, pageSize);
     }
@@ -38,7 +38,7 @@ public class SpecialPriceServiceImpl implements SpecialPriceService {
      * @param pageSize ：页大小
      * @return com.github.common.core.response.Pageable<com.github.product.entity.vo.SpecialPriceProductVO>
      */
-    private Pageable<SpecialPriceProductVO> secondLevelCacheListPage(Integer pageNum, Integer pageSize) {
+    private PageResult<SpecialPriceProductVO> secondLevelCacheListPage(Integer pageNum, Integer pageSize) {
         int start = (pageNum - 1) * pageSize;
         int end = start + pageSize - 1;
         List<SpecialPriceProductVO> productList = null;
@@ -63,7 +63,7 @@ public class SpecialPriceServiceImpl implements SpecialPriceService {
 
         }
 
-        return Pageable.warp(productList, pageNum, pageSize, size);
+        return PageResult.warp(productList, pageNum, pageSize, size);
     }
 
     /**
@@ -72,7 +72,7 @@ public class SpecialPriceServiceImpl implements SpecialPriceService {
      * @param pageSize ：页大小
      * @return com.github.common.core.response.Pageable<com.github.product.entity.vo.SpecialPriceProductVO>
      */
-    private Pageable<SpecialPriceProductVO> listPage(Integer pageNum, Integer pageSize) {
+    private PageResult<SpecialPriceProductVO> listPage(Integer pageNum, Integer pageSize) {
         int start = (pageNum - 1) * pageSize;
         int end = start + pageSize - 1;
         List<SpecialPriceProductVO> productList = null;
@@ -91,6 +91,6 @@ public class SpecialPriceServiceImpl implements SpecialPriceService {
 
         }
 
-        return Pageable.warp(productList, pageNum, pageSize, size);
+        return PageResult.warp(productList, pageNum, pageSize, size);
     }
 }
