@@ -1,4 +1,4 @@
-package com.github.product.param;
+package com.github.comment.param;
 
 import com.github.common.core.base.PageQuery;
 import lombok.Data;
@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class CommentPageQueryParam extends PageQuery {
     /**
-     * 商品id
+     * 话题id
      */
-    private String productId;
+    private String topicId;
 }

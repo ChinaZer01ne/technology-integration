@@ -194,5 +194,6 @@
         <module>pay-service</module>
         <module>base-bom</module>
         <module>config-server</module>
+        <module>comment-service</module>
     </modules>
 </project>

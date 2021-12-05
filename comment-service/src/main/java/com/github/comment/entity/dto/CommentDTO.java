@@ -1,4 +1,4 @@
-package com.github.product.entity.dto;
+package com.github.comment.entity.dto;
 
 import lombok.Data;
 /**
@@ -6,11 +6,11 @@ import lombok.Data;
  * @since 2021/12/2 23:49
  */
 @Data
-public class ProductCommentDTO {
+public class CommentDTO {
 
     private String id;
 
-    private Integer productId;
+    private String topicId;
 
     private Integer userId;
 

@@ -13,6 +13,6 @@ public class BaseLogicDeleteEntity extends BaseEntity {
     /**
      * 是否删除
      */
-    private Boolean isDelete;
+    private Integer isDelete;
 
 }

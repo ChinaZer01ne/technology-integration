@@ -1,9 +1,10 @@
-package com.github.product.controller;
+package com.github.comment.controller;
 
+import com.github.comment.entity.Comment;
+import com.github.comment.param.CommentPageQueryParam;
+import com.github.comment.service.CommentService;
 import com.github.common.core.response.PageResult;
 import com.github.common.core.response.ServerResponse;
-import com.github.product.param.CommentPageQueryParam;
-import com.github.product.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,7 @@ public class CommentController {
     private CommentService commentService;
 
     @GetMapping("/list")
-    public PageResult<String> list(CommentPageQueryParam commentPageQueryParam) {
+    public PageResult<Comment> list(CommentPageQueryParam commentPageQueryParam) {
         return commentService.list(commentPageQueryParam);
     }
 }

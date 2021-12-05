@@ -1,9 +1,10 @@
-package com.github.product.service;
+package com.github.comment.service;
 
+
+import com.github.comment.entity.Comment;
+import com.github.comment.entity.dto.CommentDTO;
+import com.github.comment.param.CommentPageQueryParam;
 import com.github.common.core.response.PageResult;
-import com.github.product.entity.dto.ProductCommentDTO;
-import com.github.product.entity.dto.ProductCommentFavoriteDTO;
-import com.github.product.param.CommentPageQueryParam;
 
 import java.util.List;
 
@@ -18,14 +19,14 @@ public interface CommentService {
      * @param commentPageQueryParam :
      * @return com.github.common.core.response.PageResult<java.lang.String>
      */
-    PageResult<String> list(CommentPageQueryParam commentPageQueryParam);
+    PageResult<Comment> list(CommentPageQueryParam commentPageQueryParam);
 
     /**
      * 获取评论列表
-     * @param productCommentDTO :
+     * @param commentDTO :
      * @return com.github.common.core.response.PageResult<java.lang.String>
      */
-    boolean save(ProductCommentDTO productCommentDTO);
+    boolean save(CommentDTO commentDTO);
 
     /**
      * 逻辑删除课程评论
@@ -40,7 +41,7 @@ public interface CommentService {
      * @param userId :
      * @return java.util.List<com.github.product.dto.ProductCommentDTO>
      */
-    List<ProductCommentDTO> getUserById(Integer userId);
+    List<CommentDTO> getUserById(Integer userId);
 
     /**
      * 评论点赞
@@ -48,7 +49,7 @@ public interface CommentService {
      * @param commentId :
      * @return com.github.product.dto.ProductCommentFavoriteDTO
      */
-    ProductCommentFavoriteDTO favorite(Integer userId, String commentId);
+    CommentDTO favorite(Integer userId, String commentId);
     /**
      * 评论取消点赞
      * @param userId :
